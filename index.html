@@ -11,12 +11,9 @@
 --cream:#f5f1e6;
 --gold:#c49b63;
 }
+
 *{box-sizing:border-box;}
-body{
-margin:0;
-font-family:sans-serif;
-background:var(--cream);
-}
+body{margin:0;font-family:sans-serif;background:var(--cream);}
 
 header{
 background:var(--green);
@@ -30,18 +27,23 @@ top:0;
 z-index:999;
 }
 
-.logo{
-font-weight:bold;
-font-size:18px;
-cursor:pointer;
-}
-
+.logo{font-weight:bold;cursor:pointer;}
 .cart-btn{
 background:var(--gold);
 color:black;
 padding:6px 12px;
 border-radius:20px;
 cursor:pointer;
+}
+
+.admin-panel-btn{
+background:red;
+color:white;
+padding:6px 12px;
+border-radius:20px;
+cursor:pointer;
+margin-left:10px;
+display:none;
 }
 
 .hero{
@@ -53,9 +55,7 @@ text-align:center;
 padding:70px 20px;
 }
 
-.section{
-padding:30px 15px;
-}
+.section{padding:30px 15px;}
 
 .products{
 display:grid;
@@ -71,10 +71,7 @@ box-shadow:0 3px 10px rgba(0,0,0,.1);
 position:relative;
 }
 
-.slider{
-position:relative;
-}
-
+.slider{position:relative;}
 .slider img{
 width:100%;
 aspect-ratio:4/5;
@@ -92,7 +89,6 @@ border:none;
 padding:5px 10px;
 cursor:pointer;
 }
-
 .slider button:first-of-type{left:5px;}
 .slider button:last-of-type{right:5px;}
 
@@ -105,7 +101,6 @@ border-radius:20px;
 font-size:12px;
 color:white;
 }
-
 .best{background:var(--gold);}
 .hot{background:red; top:35px;}
 
@@ -147,13 +142,21 @@ max-height:90vh;
 overflow:auto;
 }
 
+.logout-btn{
+background:black;
+margin-top:10px;
+}
+
 </style>
 </head>
 <body>
 
 <header>
 <div class="logo" onclick="secretClick()">Lunatic Store</div>
-<div class="cart-btn" onclick="openCart()">Keranjang (<span id="cartCount">0</span>)</div>
+<div>
+<span class="cart-btn" onclick="openCart()">Keranjang (<span id="cartCount">0</span>)</span>
+<span class="admin-panel-btn" id="adminBtn" onclick="openAdmin()">Admin Panel</span>
+</div>
 </header>
 
 <div class="hero">
@@ -185,7 +188,7 @@ overflow:auto;
 <!-- ADMIN -->
 <div class="popup" id="adminPopup">
 <div class="popup-box">
-<h3>Tambah Produk</h3>
+<h3>Admin Panel</h3>
 <input type="hidden" id="editIndex">
 <input type="text" id="title" placeholder="Nama Produk">
 <input type="number" id="price" placeholder="Harga">
@@ -205,7 +208,8 @@ overflow:auto;
 <label><input type="checkbox" id="bestSeller"> Best Seller</label>
 <label><input type="checkbox" id="terlaris"> Produk Terlaris</label>
 
-<button onclick="saveProduct()">Simpan</button>
+<button onclick="saveProduct()">Simpan Produk</button>
+<button class="logout-btn" onclick="logout()">Logout</button>
 </div>
 </div>
 
@@ -220,24 +224,7 @@ overflow:auto;
 
 <script>
 
-let products=JSON.parse(localStorage.getItem("products"))||[
-{
-title:"Gamis Emerald",
-price:299000,
-stock:10,
-category:"Gamis",
-bestSeller:true,
-terlaris:true,
-images:[
-"https://via.placeholder.com/400x500?text=Gamis+1",
-"https://via.placeholder.com/400x500?text=Gamis+2",
-"https://via.placeholder.com/400x500?text=Gamis+3",
-"https://via.placeholder.com/400x500?text=Gamis+4",
-"https://via.placeholder.com/400x500?text=Gamis+5"
-]
-}
-];
-
+let products=JSON.parse(localStorage.getItem("products"))||[];
 let cart=[];
 let clickCount=0;
 let isAdmin=localStorage.getItem("isAdmin")==="true";
@@ -249,6 +236,8 @@ localStorage.setItem("isAdmin",isAdmin);
 }
 
 function render(){
+document.getElementById("adminBtn").style.display=isAdmin?"inline-block":"none";
+
 let container=document.getElementById("productList");
 container.innerHTML="";
 let filter=document.getElementById("filterCategory").value;
@@ -259,7 +248,6 @@ products.filter(p=>p.category===filter);
 filtered.forEach((p,i)=>{
 container.innerHTML+=`
 <div class="card">
-
 ${p.bestSeller?'<div class="badge best">Best Seller 🔥</div>':''}
 ${p.terlaris?'<div class="badge hot">Terlaris 👑</div>':''}
 
@@ -278,10 +266,10 @@ ${isAdmin?`
 <button onclick="editProduct(${i})">Edit</button>
 <button onclick="deleteProduct(${i})">Hapus</button>
 `:""}
-
 </div>
 `;
 });
+
 document.getElementById("cartCount").innerText=cart.length;
 }
 
@@ -343,8 +331,18 @@ isAdmin=true;
 saveData();
 render();
 document.getElementById("loginPopup").style.display="none";
-document.getElementById("adminPopup").style.display="flex";
 }else alert("Login salah");
+}
+
+function logout(){
+isAdmin=false;
+saveData();
+render();
+document.getElementById("adminPopup").style.display="none";
+}
+
+function openAdmin(){
+document.getElementById("adminPopup").style.display="flex";
 }
 
 function saveProduct(){
@@ -356,9 +354,7 @@ stock:Number(stock.value),
 category:category.value,
 bestSeller:bestSeller.checked,
 terlaris:terlaris.checked,
-images:[
-img1.value,img2.value,img3.value,img4.value,img5.value
-]
+images:[img1.value,img2.value,img3.value,img4.value,img5.value]
 };
 
 if(idx==="") products.push(data);
@@ -381,7 +377,7 @@ terlaris.checked=p.terlaris;
 [img1,img2,img3,img4,img5].forEach((el,index)=>{
 el.value=p.images[index];
 });
-document.getElementById("adminPopup").style.display="flex";
+openAdmin();
 }
 
 function deleteProduct(i){
@@ -391,7 +387,7 @@ render();
 }
 
 render();
-</script>
 
+</script>
 </body>
 </html>
