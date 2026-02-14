@@ -3,240 +3,332 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lunatic Fashion Store - Pro Max</title>
+<title>Lunatic Store Pro Max</title>
 
 <style>
 :root{
 --green:#0f2e1c;
 --cream:#f5f1e6;
---gold:#d4af37;
+--gold:#c49b63;
 }
 *{box-sizing:border-box;}
-body{margin:0;font-family:sans-serif;background:var(--cream);}
+body{
+margin:0;
+font-family:sans-serif;
+background:var(--cream);
+}
+
 header{
 background:var(--green);
-color:var(--gold);
+color:white;
 padding:15px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-position:sticky;top:0;z-index:1000;
+position:sticky;
+top:0;
+z-index:999;
 }
-.logo{font-weight:bold;cursor:pointer;}
-.cart{
+
+.logo{
+font-weight:bold;
+font-size:18px;
+cursor:pointer;
+}
+
+.cart-btn{
 background:var(--gold);
-color:#000;
+color:black;
 padding:6px 12px;
 border-radius:20px;
 cursor:pointer;
 }
+
 .hero{
-background:linear-gradient(rgba(15,46,28,.8),rgba(15,46,28,.8)),
-url('https://picsum.photos/1200/400?fashion');
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url('https://images.unsplash.com/photo-1520975922284-9b3b9c3d8f89');
 background-size:cover;
-color:#fff;text-align:center;padding:70px 20px;
+color:white;
+text-align:center;
+padding:70px 20px;
 }
-.section{padding:40px 20px;text-align:center;}
+
+.section{
+padding:30px 15px;
+}
+
 .products{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:15px;margin-top:20px;
-}
-.card{
-background:#fff;border-radius:10px;overflow:hidden;
-box-shadow:0 3px 10px rgba(0,0,0,.1);
-display:flex;flex-direction:column;
-}
-.card img{width:100%;height:180px;object-fit:cover;}
-.card-body{
-padding:10px;flex:1;display:flex;
-flex-direction:column;justify-content:space-between;
-}
-button{
-background:var(--green);
-color:#fff;border:none;padding:7px;
-border-radius:5px;cursor:pointer;margin-top:5px;
-}
-button:hover{opacity:.9;}
-.promo{
-background:var(--green);color:#fff;
-padding:30px;text-align:center;
+gap:15px;
 }
 
-/* POPUPS */
+.card{
+background:white;
+border-radius:12px;
+padding:10px;
+box-shadow:0 3px 10px rgba(0,0,0,.1);
+position:relative;
+}
+
+.slider{
+position:relative;
+}
+
+.slider img{
+width:100%;
+aspect-ratio:4/5;
+object-fit:cover;
+border-radius:10px;
+}
+
+.slider button{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:rgba(0,0,0,.5);
+color:white;
+border:none;
+padding:5px 10px;
+cursor:pointer;
+}
+
+.slider button:first-of-type{left:5px;}
+.slider button:last-of-type{right:5px;}
+
+.badge{
+position:absolute;
+top:10px;
+left:10px;
+padding:4px 8px;
+border-radius:20px;
+font-size:12px;
+color:white;
+}
+
+.best{background:var(--gold);}
+.hot{background:red; top:35px;}
+
+button{
+background:var(--green);
+color:white;
+border:none;
+padding:6px;
+border-radius:5px;
+cursor:pointer;
+margin-top:5px;
+width:100%;
+}
+
+select,input{
+width:100%;
+padding:6px;
+margin:5px 0;
+}
+
 .popup{
-position:fixed;top:0;left:0;width:100%;height:100%;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
 background:rgba(0,0,0,.7);
-display:none;justify-content:center;align-items:center;
+display:none;
+justify-content:center;
+align-items:center;
 z-index:2000;
 }
+
 .popup-box{
-background:#fff;padding:20px;border-radius:10px;
-width:90%;max-width:400px;max-height:90vh;overflow:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+width:90%;
+max-width:400px;
+max-height:90vh;
+overflow:auto;
 }
-input,select{
-width:100%;padding:8px;margin:5px 0;
-}
-.admin-badge{
-background:red;color:#fff;padding:2px 8px;
-font-size:12px;border-radius:10px;margin-left:10px;
-}
-@media(max-width:600px){
-.card img{height:150px;}
-}
+
 </style>
 </head>
 <body>
 
 <header>
-<div class="logo" onclick="secretClick()">Lunatic Fashion Store <span id="adminBadge"></span></div>
-<div class="cart" onclick="openCart()">Keranjang (<span id="cartCount">0</span>)</div>
+<div class="logo" onclick="secretClick()">Lunatic Store</div>
+<div class="cart-btn" onclick="openCart()">Keranjang (<span id="cartCount">0</span>)</div>
 </header>
 
 <div class="hero">
-<h1>Ramadhan Elegant Collection</h1>
-<p>Elegan • Mewah • Berkelas</p>
+<h1>Ramadhan Collection</h1>
+<p>Elegant • Modern • Premium</p>
 </div>
 
 <div class="section">
-<h2>Best Seller & Unggulan</h2>
-<div class="products" id="featured"></div>
+<select id="filterCategory" onchange="render()">
+<option value="all">Semua Produk</option>
+<option value="Gamis">Gamis</option>
+<option value="Couple">Couple</option>
+<option value="Anak">Anak</option>
+</select>
+
+<div class="products" id="productList"></div>
 </div>
 
-<div class="section">
-<h2>Gamis Collection</h2>
-<div class="products" id="gamis"></div>
-</div>
-
-<div class="section">
-<h2>Koleksi Celana Anak</h2>
-<div class="products" id="anak"></div>
-</div>
-
-<div class="promo">
-<h3>RAMADHAN SALE</h3>
-<p>Diskon hingga 25% + Free Gift</p>
-<p>WhatsApp: 08123456789</p>
-<p>Alamat: Jakarta Selatan</p>
-</div>
-
-<!-- LOGIN POPUP -->
+<!-- LOGIN -->
 <div class="popup" id="loginPopup">
 <div class="popup-box">
 <h3>Admin Login</h3>
 <input type="text" id="username" placeholder="Username">
 <input type="password" id="password" placeholder="Password">
 <button onclick="login()">Login</button>
-<button onclick="closeLogin()" style="background:gray">Batal</button>
 </div>
 </div>
 
-<!-- CART POPUP -->
-<div class="popup" id="cartPopup">
-<div class="popup-box">
-<h3>Keranjang Belanja</h3>
-<div id="cartItems"></div>
-<button onclick="checkout()">Checkout via WhatsApp</button>
-<button onclick="closeCart()" style="background:gray">Tutup</button>
-</div>
-</div>
-
-<!-- ADMIN POPUP -->
+<!-- ADMIN -->
 <div class="popup" id="adminPopup">
 <div class="popup-box">
-<h3>Tambah / Edit Produk</h3>
+<h3>Tambah Produk</h3>
 <input type="hidden" id="editIndex">
 <input type="text" id="title" placeholder="Nama Produk">
 <input type="number" id="price" placeholder="Harga">
 <input type="number" id="stock" placeholder="Stok">
 <select id="category">
-<option value="featured">Featured</option>
-<option value="gamis">Gamis</option>
-<option value="anak">Anak</option>
+<option value="Gamis">Gamis</option>
+<option value="Couple">Couple</option>
+<option value="Anak">Anak</option>
 </select>
-<input type="file" id="imageInput">
+
+<input type="text" id="img1" placeholder="URL Foto 1">
+<input type="text" id="img2" placeholder="URL Foto 2">
+<input type="text" id="img3" placeholder="URL Foto 3">
+<input type="text" id="img4" placeholder="URL Foto 4">
+<input type="text" id="img5" placeholder="URL Foto 5">
+
+<label><input type="checkbox" id="bestSeller"> Best Seller</label>
+<label><input type="checkbox" id="terlaris"> Produk Terlaris</label>
+
 <button onclick="saveProduct()">Simpan</button>
-<button onclick="closeAdmin()" style="background:gray">Tutup</button>
+</div>
+</div>
+
+<!-- CART -->
+<div class="popup" id="cartPopup">
+<div class="popup-box">
+<h3>Keranjang</h3>
+<div id="cartItems"></div>
+<button onclick="checkout()">Checkout WA</button>
 </div>
 </div>
 
 <script>
 
 let products=JSON.parse(localStorage.getItem("products"))||[
-{title:"Gamis Royal Emerald",price:399000,stock:10,category:"featured",image:"https://picsum.photos/400?1"},
-{title:"Couple Ramadhan Gold",price:149000,stock:8,category:"featured",image:"https://picsum.photos/400?2"}
+{
+title:"Gamis Emerald",
+price:299000,
+stock:10,
+category:"Gamis",
+bestSeller:true,
+terlaris:true,
+images:[
+"https://via.placeholder.com/400x500?text=Gamis+1",
+"https://via.placeholder.com/400x500?text=Gamis+2",
+"https://via.placeholder.com/400x500?text=Gamis+3",
+"https://via.placeholder.com/400x500?text=Gamis+4",
+"https://via.placeholder.com/400x500?text=Gamis+5"
+]
+}
 ];
 
 let cart=[];
 let clickCount=0;
 let isAdmin=localStorage.getItem("isAdmin")==="true";
-let imageBase64="";
+let currentIndex={};
 
 function saveData(){
 localStorage.setItem("products",JSON.stringify(products));
 localStorage.setItem("isAdmin",isAdmin);
 }
 
-/* RENDER */
 function render(){
-["featured","gamis","anak"].forEach(id=>{
-document.getElementById(id).innerHTML="";
-});
+let container=document.getElementById("productList");
+container.innerHTML="";
+let filter=document.getElementById("filterCategory").value;
 
-products.forEach((p,i)=>{
-let card=`
+let filtered=filter==="all"?products:
+products.filter(p=>p.category===filter);
+
+filtered.forEach((p,i)=>{
+container.innerHTML+=`
 <div class="card">
-<img src="${p.image}">
-<div class="card-body">
-<div>
+
+${p.bestSeller?'<div class="badge best">Best Seller 🔥</div>':''}
+${p.terlaris?'<div class="badge hot">Terlaris 👑</div>':''}
+
+<div class="slider">
+<img src="${p.images[0]}" id="img${i}">
+<button onclick="prev(${i})">‹</button>
+<button onclick="next(${i})">›</button>
+</div>
+
 <h4>${p.title}</h4>
 <p>Rp ${p.price.toLocaleString()}</p>
 <p>Stok: ${p.stock}</p>
-</div>
+
 <button onclick="addCart(${i})">Tambah</button>
 ${isAdmin?`
 <button onclick="editProduct(${i})">Edit</button>
-<button onclick="deleteProduct(${i})" style="background:red">Hapus</button>`:""}
-</div>
+<button onclick="deleteProduct(${i})">Hapus</button>
+`:""}
+
 </div>
 `;
-
-document.getElementById(p.category).innerHTML+=card;
 });
-
 document.getElementById("cartCount").innerText=cart.length;
-document.getElementById("adminBadge").innerHTML=isAdmin?'<span class="admin-badge">ADMIN</span>':"";
 }
 
-/* CART */
+function next(i){
+if(!currentIndex[i]) currentIndex[i]=0;
+currentIndex[i]++;
+if(currentIndex[i]>=products[i].images.length)
+currentIndex[i]=0;
+document.getElementById("img"+i).src=
+products[i].images[currentIndex[i]];
+}
+
+function prev(i){
+if(!currentIndex[i]) currentIndex[i]=0;
+currentIndex[i]--;
+if(currentIndex[i]<0)
+currentIndex[i]=products[i].images.length-1;
+document.getElementById("img"+i).src=
+products[i].images[currentIndex[i]];
+}
+
 function addCart(i){
 if(products[i].stock>0){
 products[i].stock--;
 cart.push(products[i]);
 saveData();
 render();
-}else alert("Stok habis!");
+}else alert("Stok habis");
 }
+
 function openCart(){
 document.getElementById("cartPopup").style.display="flex";
 let html="";
 cart.forEach(p=>{
-html+=`<p>${p.title} - Rp ${p.price.toLocaleString()}</p>`;
+html+=`<p>${p.title} - Rp ${p.price}</p>`;
 });
-document.getElementById("cartItems").innerHTML=html||"<p>Kosong</p>";
+document.getElementById("cartItems").innerHTML=html||"Kosong";
 }
-function closeCart(){
-document.getElementById("cartPopup").style.display="none";
-}
+
 function checkout(){
-let text="Halo, saya mau pesan:%0A";
+let text="Halo saya mau pesan:%0A";
 cart.forEach(p=>{
 text+=`- ${p.title}%0A`;
 });
 window.open("https://wa.me/628123456789?text="+text);
 }
 
-/* ADMIN */
 function secretClick(){
 clickCount++;
 if(clickCount>=5){
@@ -244,30 +336,17 @@ document.getElementById("loginPopup").style.display="flex";
 clickCount=0;
 }
 }
+
 function login(){
 if(username.value==="admin" && password.value==="12345"){
 isAdmin=true;
 saveData();
 render();
-closeLogin();
+document.getElementById("loginPopup").style.display="none";
+document.getElementById("adminPopup").style.display="flex";
 }else alert("Login salah");
 }
-function closeLogin(){
-document.getElementById("loginPopup").style.display="none";
-}
-function editProduct(i){
-document.getElementById("adminPopup").style.display="flex";
-editIndex.value=i;
-title.value=products[i].title;
-price.value=products[i].price;
-stock.value=products[i].stock;
-category.value=products[i].category;
-}
-function deleteProduct(i){
-products.splice(i,1);
-saveData();
-render();
-}
+
 function saveProduct(){
 let idx=editIndex.value;
 let data={
@@ -275,26 +354,44 @@ title:title.value,
 price:Number(price.value),
 stock:Number(stock.value),
 category:category.value,
-image:imageBase64||products[idx]?.image||"https://picsum.photos/400"
+bestSeller:bestSeller.checked,
+terlaris:terlaris.checked,
+images:[
+img1.value,img2.value,img3.value,img4.value,img5.value
+]
 };
+
 if(idx==="") products.push(data);
 else products[idx]=data;
+
 saveData();
 render();
-closeAdmin();
-}
-function closeAdmin(){
 document.getElementById("adminPopup").style.display="none";
-editIndex.value="";
 }
-imageInput.addEventListener("change",e=>{
-let reader=new FileReader();
-reader.onload=()=>imageBase64=reader.result;
-reader.readAsDataURL(e.target.files[0]);
+
+function editProduct(i){
+let p=products[i];
+editIndex.value=i;
+title.value=p.title;
+price.value=p.price;
+stock.value=p.stock;
+category.value=p.category;
+bestSeller.checked=p.bestSeller;
+terlaris.checked=p.terlaris;
+[img1,img2,img3,img4,img5].forEach((el,index)=>{
+el.value=p.images[index];
 });
+document.getElementById("adminPopup").style.display="flex";
+}
+
+function deleteProduct(i){
+products.splice(i,1);
+saveData();
+render();
+}
 
 render();
-
 </script>
+
 </body>
 </html>
