@@ -3,463 +3,338 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lunatic Store Premium</title>
+<title>Ramadhan Ultra Luxury</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
---green:#0f2e1c;
---cream:#f5f1e6;
---gold:#d4af37;
+--hijau:#0f2f25;
+--cream:#f5f0e6;
+--gold:#c6a545;
 }
 
-*{box-sizing:border-box;}
-body{
+*{
 margin:0;
-font-family:'Segoe UI',sans-serif;
-background:var(--cream);
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:var(--hijau);
+color:var(--cream);
 overflow-x:hidden;
 }
 
-/* HEADER */
 header{
-background:var(--green);
-color:white;
-padding:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-z-index:1000;
-}
-
-.logo{
-font-weight:bold;
-cursor:pointer;
+padding:30px 20px;
+text-align:center;
+background:linear-gradient(90deg,#0f2f25,#153f30);
 position:relative;
 }
 
-/* GOLD SHIMMER */
-.logo::after{
-content:"";
-position:absolute;
-top:0;left:-75%;
-width:50%;
-height:100%;
-background:linear-gradient(
-120deg,
-transparent,
-rgba(255,215,0,.6),
-transparent);
-animation:shimmer 3s infinite;
+header h1{
+font-size:28px;
+color:var(--gold);
+animation:shimmer 4s infinite linear;
 }
 
 @keyframes shimmer{
-100%{left:125%;}
+0%{text-shadow:0 0 5px gold;}
+50%{text-shadow:0 0 25px gold;}
+100%{text-shadow:0 0 5px gold;}
 }
 
-.cart-btn{
-background:var(--gold);
-color:black;
-padding:6px 14px;
-border-radius:20px;
-cursor:pointer;
-transition:.3s;
-}
-.cart-btn:hover{transform:scale(1.05);}
-
-/* HERO */
-.hero{
-background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-url('https://images.unsplash.com/photo-1520975922284-9b3b9c3d8f89');
-background-size:cover;
-color:white;
-text-align:center;
-padding:80px 20px;
-animation:fadeIn 1.2s ease;
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
 }
 
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1; transform:translateY(0);}
-}
-
-.section{padding:30px 15px;}
-
-.products{
+.grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:15px;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
 }
 
 .card{
-background:white;
+background:var(--cream);
+color:#000;
 border-radius:15px;
-padding:10px;
-box-shadow:0 8px 25px rgba(0,0,0,.08);
-position:relative;
-transition:.4s;
-animation:fadeIn 0.8s ease;
+overflow:hidden;
+box-shadow:0 10px 20px rgba(0,0,0,0.4);
+transition:0.4s;
+animation:fadeUp 0.6s ease;
 }
 
 .card:hover{
-transform:translateY(-6px) scale(1.02);
-box-shadow:0 15px 35px rgba(0,0,0,.15);
-}
-
-.slider{position:relative;}
-
-.slider img{
-width:100%;
-aspect-ratio:4/5;
-object-fit:cover;
-border-radius:12px;
-transition:.4s;
-}
-
-.slider img:hover{
 transform:scale(1.05);
 }
 
-.slider button{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-background:rgba(0,0,0,.5);
-color:white;
-border:none;
-padding:5px 10px;
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
 cursor:pointer;
-border-radius:5px;
 }
 
-.slider button:first-of-type{left:5px;}
-.slider button:last-of-type{right:5px;}
-
-.badge{
-position:absolute;
-top:10px;
-left:10px;
-padding:4px 10px;
-border-radius:20px;
-font-size:12px;
-color:white;
-animation:fadeIn 1s ease;
+.card-content{
+padding:15px;
 }
 
-.best{background:var(--gold);}
-.hot{background:#e74c3c; top:35px;}
+.price{
+color:var(--gold);
+font-weight:bold;
+margin:5px 0;
+}
 
 button{
-background:var(--green);
-color:white;
+background:var(--gold);
 border:none;
-padding:7px;
-border-radius:6px;
+padding:8px 12px;
 cursor:pointer;
-margin-top:6px;
-width:100%;
-transition:.3s;
-}
-button:hover{opacity:.85;}
-
-select,input{
-width:100%;
-padding:7px;
-margin:6px 0;
+border-radius:8px;
+font-weight:bold;
 }
 
-/* POPUP */
+button:hover{
+opacity:0.8;
+}
+
+.section-title{
+margin:40px 0 20px;
+font-size:22px;
+color:var(--gold);
+}
+
+.cart{
+position:fixed;
+top:20px;
+right:20px;
+background:var(--gold);
+color:#000;
+padding:10px 15px;
+border-radius:20px;
+cursor:pointer;
+z-index:999;
+}
+
 .popup{
 position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,.7);
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
 display:none;
-justify-content:center;
 align-items:center;
-z-index:2000;
-animation:fadeIn .3s ease;
+justify-content:center;
+animation:fadeIn 0.4s ease;
+z-index:9999;
 }
 
-.popup-box{
-background:white;
+.popup-content{
+background:var(--cream);
+color:#000;
 padding:20px;
 border-radius:15px;
-width:90%;
 max-width:400px;
-max-height:90vh;
-overflow:auto;
-animation:scaleUp .3s ease;
+width:90%;
+animation:scaleIn 0.3s ease;
 }
 
-@keyframes scaleUp{
-from{transform:scale(.8);opacity:0;}
-to{transform:scale(1);opacity:1;}
+input,select{
+width:100%;
+padding:8px;
+margin:8px 0;
 }
 
-.logout-btn{
-background:black;
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+@keyframes scaleIn{
+from{transform:scale(0.7);}
+to{transform:scale(1);}
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+footer{
+margin-top:50px;
+padding:30px;
+text-align:center;
+background:#092019;
 }
 
 @media(max-width:600px){
-.hero{padding:60px 15px;}
+header h1{font-size:20px;}
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo" onclick="secretClick()">Lunatic Store</div>
-<div>
-<span class="cart-btn" onclick="openCart()">Keranjang (<span id="cartCount">0</span>)</span>
-<span class="cart-btn" id="adminBtn" style="display:none;background:red;" onclick="openAdmin()">Admin</span>
-</div>
+<h1>RAMADHAN ULTRA LUXURY</h1>
+<p>Elegant Collection 2026</p>
 </header>
 
-<div class="hero">
-<h1>Ramadhan Premium Collection</h1>
-<p>Elegant • Luxury • Modern</p>
+<div class="cart" onclick="openCart()">🛒 <span id="cartCount">0</span></div>
+
+<div class="container" id="productContainer"></div>
+
+<!-- CART POPUP -->
+<div class="popup" id="cartPopup">
+<div class="popup-content">
+<h3>Keranjang</h3>
+<div id="cartItems"></div>
+<br>
+<button onclick="checkout()">Checkout</button>
+</div>
 </div>
 
-<div class="section">
-<select id="filterCategory" onchange="render()">
-<option value="all">Semua Produk</option>
-<option value="Gamis">Gamis</option>
-<option value="Couple">Couple</option>
-<option value="Anak">Anak</option>
-</select>
-
-<div class="products" id="productList"></div>
-</div>
-
-<!-- LOGIN -->
+<!-- LOGIN POPUP -->
 <div class="popup" id="loginPopup">
-<div class="popup-box">
-<h3>Admin Login</h3>
-<input type="text" id="username" placeholder="Username">
+<div class="popup-content">
+<h3>Login Admin</h3>
 <input type="password" id="password" placeholder="Password">
 <button onclick="login()">Login</button>
 </div>
 </div>
 
-<!-- ADMIN -->
+<!-- ADMIN PANEL -->
 <div class="popup" id="adminPopup">
-<div class="popup-box">
-<h3>Admin Panel</h3>
-<input type="hidden" id="editIndex">
-<input type="text" id="title" placeholder="Nama Produk">
-<input type="number" id="price" placeholder="Harga">
-<input type="number" id="stock" placeholder="Stok">
-<select id="category">
-<option value="Gamis">Gamis</option>
-<option value="Couple">Couple</option>
-<option value="Anak">Anak</option>
+<div class="popup-content">
+<h3>Tambah Produk</h3>
+<input type="text" id="pname" placeholder="Nama Produk">
+<input type="number" id="pprice" placeholder="Harga">
+<select id="pcat">
+<option>Best Seller</option>
+<option>Produk Terlaris</option>
+<option>Gamis</option>
+<option>Celana Anak</option>
 </select>
-
-<input type="text" id="img1" placeholder="URL Foto 1">
-<input type="text" id="img2" placeholder="URL Foto 2">
-<input type="text" id="img3" placeholder="URL Foto 3">
-<input type="text" id="img4" placeholder="URL Foto 4">
-<input type="text" id="img5" placeholder="URL Foto 5">
-
-<label><input type="checkbox" id="bestSeller"> Best Seller</label>
-<label><input type="checkbox" id="terlaris"> Produk Terlaris</label>
-
-<button onclick="saveProduct()">Simpan</button>
-<button class="logout-btn" onclick="logout()">Logout</button>
+<input type="file" id="pimg">
+<button onclick="addProduct()">Simpan</button>
+<button onclick="logout()">Logout</button>
 </div>
 </div>
 
-<!-- CART -->
-<div class="popup" id="cartPopup">
-<div class="popup-box">
-<h3>Keranjang</h3>
-<div id="cartItems"></div>
-<button onclick="checkout()">Checkout WA</button>
-</div>
-</div>
+<footer>
+<p>Ramadhan Sale 70% OFF</p>
+<p>IG | FB | Tiktok | WA</p>
+<p>Alamat: Jl. Raya Ramadhan No. 123</p>
+</footer>
 
 <script>
-
 let products=JSON.parse(localStorage.getItem("products"))||[];
 let cart=[];
-let clickCount=0;
-let isAdmin=localStorage.getItem("isAdmin")==="true";
-let currentIndex={};
+let admin=false;
 
-function saveData(){
+function saveProducts(){
 localStorage.setItem("products",JSON.stringify(products));
-localStorage.setItem("isAdmin",isAdmin);
 }
 
 function render(){
-document.getElementById("adminBtn").style.display=isAdmin?"inline-block":"none";
-let container=document.getElementById("productList");
+let container=document.getElementById("productContainer");
 container.innerHTML="";
-let filter=document.getElementById("filterCategory").value;
+let categories=["Best Seller","Produk Terlaris","Gamis","Celana Anak"];
 
-let filtered=filter==="all"?products:
-products.filter(p=>p.category===filter);
-
-filtered.forEach((p,i)=>{
-container.innerHTML+=`
-<div class="card">
-${p.bestSeller?'<div class="badge best">Best Seller 🔥</div>':''}
-${p.terlaris?'<div class="badge hot">Terlaris 👑</div>':''}
-
-<div class="slider">
-<img src="${p.images[0]}" id="img${i}">
-<button onclick="prev(${i})">‹</button>
-<button onclick="next(${i})">›</button>
+categories.forEach(cat=>{
+let filtered=products.filter(p=>p.category===cat);
+if(filtered.length>0){
+container.innerHTML+=`<h2 class='section-title'>${cat}</h2><div class='grid'>${filtered.map((p,i)=>`
+<div class='card'>
+<img src='${p.image}' onclick='zoom("${p.image}")'>
+<div class='card-content'>
+<h4>${p.name}</h4>
+<div class='price'>Rp ${p.price}</div>
+<button onclick='addToCart(${i})'>Tambah</button>
 </div>
-
-<h4>${p.title}</h4>
-<p>Rp ${p.price.toLocaleString()}</p>
-<p>Stok: ${p.stock}</p>
-
-<button onclick="addCart(${i})">Tambah</button>
-${isAdmin?`
-<button onclick="editProduct(${i})">Edit</button>
-<button onclick="deleteProduct(${i})">Hapus</button>
-`:""}
-</div>
-`;
+</div>`).join("")}</div>`;
+}
 });
-
-document.getElementById("cartCount").innerText=cart.length;
 }
 
-function next(i){
-if(!currentIndex[i]) currentIndex[i]=0;
-currentIndex[i]++;
-if(currentIndex[i]>=products[i].images.length)
-currentIndex[i]=0;
-document.getElementById("img"+i).src=
-products[i].images[currentIndex[i]];
-}
+function addProduct(){
+let name=document.getElementById("pname").value;
+let price=document.getElementById("pprice").value;
+let category=document.getElementById("pcat").value;
+let file=document.getElementById("pimg").files[0];
 
-function prev(i){
-if(!currentIndex[i]) currentIndex[i]=0;
-currentIndex[i]--;
-if(currentIndex[i]<0)
-currentIndex[i]=products[i].images.length-1;
-document.getElementById("img"+i).src=
-products[i].images[currentIndex[i]];
-}
-
-function addCart(i){
-if(products[i].stock>0){
-products[i].stock--;
-cart.push(products[i]);
-saveData();
+let reader=new FileReader();
+reader.onload=function(e){
+products.push({
+name:name,
+price:price,
+category:category,
+image:e.target.result
+});
+saveProducts();
 render();
-}else alert("Stok habis");
+alert("Produk ditambahkan!");
+}
+reader.readAsDataURL(file);
+}
+
+function addToCart(i){
+cart.push(products[i]);
+document.getElementById("cartCount").innerText=cart.length;
 }
 
 function openCart(){
 document.getElementById("cartPopup").style.display="flex";
-let html="";
-cart.forEach(p=>{
-html+=`<p>${p.title} - Rp ${p.price}</p>`;
-});
-document.getElementById("cartItems").innerHTML=html||"Kosong";
+document.getElementById("cartItems").innerHTML=cart.map(p=>`<p>${p.name} - Rp ${p.price}</p>`).join("");
 }
 
 function checkout(){
-let text="Halo saya mau pesan:%0A";
-cart.forEach(p=>{
-text+=`- ${p.title}%0A`;
-});
-window.open("https://wa.me/628123456789?text="+text);
-}
-
-function secretClick(){
-clickCount++;
-if(clickCount>=5){
-document.getElementById("loginPopup").style.display="flex";
-clickCount=0;
-}
+alert("Checkout berhasil!");
+cart=[];
+document.getElementById("cartCount").innerText=0;
+document.getElementById("cartPopup").style.display="none";
 }
 
 function login(){
-if(username.value==="admin" && password.value==="12345"){
-isAdmin=true;
-saveData();
-render();
+let pass=document.getElementById("password").value;
+if(pass==="12345"){
+admin=true;
 document.getElementById("loginPopup").style.display="none";
-}else alert("Login salah");
+document.getElementById("adminPopup").style.display="flex";
+}else{
+alert("Password salah");
+}
 }
 
 function logout(){
-isAdmin=false;
-saveData();
-render();
+admin=false;
 document.getElementById("adminPopup").style.display="none";
 }
 
-function openAdmin(){
-document.getElementById("adminPopup").style.display="flex";
+function zoom(img){
+let w=window.open("");
+w.document.write("<img src='"+img+"' style='width:100%'>");
 }
-
-function saveProduct(){
-let idx=editIndex.value;
-let data={
-title:title.value,
-price:Number(price.value),
-stock:Number(stock.value),
-category:category.value,
-bestSeller:bestSeller.checked,
-terlaris:terlaris.checked,
-images:[img1.value,img2.value,img3.value,img4.value,img5.value]
-};
-
-if(idx==="") products.push(data);
-else products[idx]=data;
-
-saveData();
-render();
-document.getElementById("adminPopup").style.display="none";
-}
-
-function editProduct(i){
-let p=products[i];
-editIndex.value=i;
-title.value=p.title;
-price.value=p.price;
-stock.value=p.stock;
-category.value=p.category;
-bestSeller.checked=p.bestSeller;
-terlaris.checked=p.terlaris;
-[img1,img2,img3,img4,img5].forEach((el,index)=>{
-el.value=p.images[index];
-});
-openAdmin();
-}
-
-function deleteProduct(i){
-products.splice(i,1);
-saveData();
-render();
-}
-
-/* CLOSE POPUP OUTSIDE CLICK */
-document.querySelectorAll(".popup").forEach(popup=>{
-popup.addEventListener("click",function(e){
-if(e.target===popup) popup.style.display="none";
-});
-});
 
 document.addEventListener("keydown",function(e){
 if(e.key==="Escape"){
-document.querySelectorAll(".popup").forEach(p=>{
-p.style.display="none";
-});
+document.querySelectorAll(".popup").forEach(p=>p.style.display="none");
 }
 });
 
-render();
+document.querySelectorAll(".popup").forEach(p=>{
+p.addEventListener("click",function(e){
+if(e.target===p)p.style.display="none";
+});
+});
 
+render();
 </script>
+
 </body>
 </html>
