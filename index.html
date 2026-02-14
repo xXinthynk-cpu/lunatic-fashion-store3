@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lunatic Fashion Store - Ramadhan Luxury</title>
+<title>Ramadhan Luxury Pro Max</title>
 
 <style>
 :root{
@@ -12,80 +12,67 @@
 --gold:#d4af37;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family: 'Segoe UI', sans-serif}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{background:var(--cream);color:#333}
 
 /* HEADER */
 header{
 background:var(--green);
 color:white;
-padding:15px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+padding:15px 25px;
 position:sticky;
 top:0;
 z-index:999;
 }
-
-.logo{
-font-size:22px;
-font-weight:bold;
-color:var(--gold);
-}
-
-.cart{
+.logo{color:var(--gold);font-weight:bold}
+.nav-btn{
 background:var(--gold);
 color:black;
-padding:8px 15px;
+padding:6px 12px;
 border-radius:20px;
 cursor:pointer;
-font-weight:bold;
+margin-left:10px;
 }
 
 /* HERO */
 .hero{
-background:linear-gradient(rgba(15,47,37,0.8),rgba(15,47,37,0.8)),
-url('images/hero.jpg');
+height:70vh;
+background:linear-gradient(rgba(15,47,37,.9),rgba(15,47,37,.9)),
+url('https://images.unsplash.com/photo-1600180758890-6b94519a8ba4');
 background-size:cover;
 background-position:center;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 color:white;
 text-align:center;
-padding:120px 20px;
 position:relative;
 overflow:hidden;
 }
+.hero h1{color:var(--gold);font-size:38px}
 
-.hero h1{
-font-size:38px;
-color:var(--gold);
-}
-
-/* GOLD SHIMMER */
-.shimmer::before{
+/* SHIMMER */
+.hero:before{
 content:"";
 position:absolute;
 top:0;
 left:-75%;
 width:50%;
 height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,215,0,0.6),transparent);
-animation:shine 3s infinite;
+background:linear-gradient(120deg,transparent,rgba(255,215,0,.5),transparent);
+animation:shine 4s infinite;
 }
-
-@keyframes shine{
-100%{left:125%}
-}
+@keyframes shine{100%{left:125%}}
 
 /* SECTION */
 .section{padding:50px 20px}
-.section h2{
-text-align:center;
-margin-bottom:30px;
-color:var(--green);
-}
+.section h2{text-align:center;color:var(--green);margin-bottom:25px}
 
+/* GRID */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -96,32 +83,19 @@ gap:20px;
 background:white;
 border-radius:15px;
 overflow:hidden;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
-transition:0.3s;
+box-shadow:0 6px 20px rgba(0,0,0,.1);
 position:relative;
 }
-
-.card:hover{transform:translateY(-5px)}
-
 .card img{
 width:100%;
 height:260px;
 object-fit:cover;
 cursor:pointer;
 }
-
 .card-body{padding:15px}
-
-.card-body h3{
-font-size:16px;
-margin-bottom:5px;
-}
-
-.price{
-color:var(--green);
-font-weight:bold;
-margin-bottom:8px;
-}
+.price{color:var(--green);font-weight:bold}
+.old-price{text-decoration:line-through;color:red;font-size:13px}
+.stock{font-size:13px;margin-bottom:8px}
 
 button{
 background:var(--green);
@@ -132,28 +106,17 @@ width:100%;
 border-radius:8px;
 cursor:pointer;
 }
+button:hover{background:var(--gold);color:black}
 
-button:hover{
-background:var(--gold);
-color:black;
-}
-
-/* SALE */
-.sale{
-background:var(--green);
+.badge{
+position:absolute;
+top:10px;
+left:10px;
+background:red;
 color:white;
-padding:40px 20px;
-text-align:center;
-}
-
-.sale h2{color:var(--gold);margin-bottom:10px}
-
-/* FOOTER */
-footer{
-background:var(--green);
-color:white;
-text-align:center;
-padding:20px;
+padding:4px 8px;
+font-size:12px;
+border-radius:6px;
 }
 
 /* POPUP */
@@ -163,59 +126,76 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,.8);
 display:none;
 justify-content:center;
 align-items:center;
 z-index:9999;
 }
-
 .popup-content{
 background:white;
 padding:20px;
 border-radius:15px;
 max-width:500px;
 width:90%;
-text-align:center;
 position:relative;
+text-align:center;
 }
-
 .popup-content img{
 width:100%;
 max-height:400px;
 object-fit:cover;
 margin-bottom:15px;
 }
-
 .close{
 position:absolute;
 top:10px;
 right:15px;
-font-size:22px;
 cursor:pointer;
+font-size:20px;
 }
 
-/* EDIT BUTTON */
-.edit-btn{
-position:absolute;
-top:10px;
-left:10px;
-background:var(--gold);
-color:black;
-padding:5px 8px;
-font-size:12px;
-border-radius:6px;
-cursor:pointer;
-display:none;
+/* ADMIN PANEL */
+.admin{
+position:fixed;
+right:-400px;
+top:0;
+width:350px;
+height:100%;
+background:white;
+box-shadow:-5px 0 20px rgba(0,0,0,.2);
+padding:20px;
+overflow:auto;
+transition:.4s;
+z-index:99999;
 }
-
-.admin-mode .edit-btn{display:block}
-
-iframe{
+.admin.active{right:0}
+.admin input,.admin textarea,.admin select{
 width:100%;
-height:300px;
-border:none;
-margin-top:20px;
+padding:8px;
+margin-bottom:8px;
+}
+
+.dashboard{
+background:#eee;
+padding:10px;
+margin-bottom:10px;
+border-radius:10px;
+}
+
+.sale{
+background:var(--green);
+color:white;
+text-align:center;
+padding:40px 20px;
+}
+.sale h2{color:var(--gold)}
+
+footer{
+background:var(--green);
+color:white;
+text-align:center;
+padding:20px;
 }
 </style>
 </head>
@@ -224,114 +204,128 @@ margin-top:20px;
 <header>
 <div class="logo">Lunatic Fashion Store</div>
 <div>
-<span class="cart" onclick="openCart()">Keranjang (<span id="cartCount">0</span>)</span>
-<span class="cart" onclick="toggleAdmin()">Admin</span>
+<span class="nav-btn" onclick="openCart()">Keranjang (<span id="cartCount">0</span>)</span>
+<span class="nav-btn" onclick="toggleAdmin()">Admin</span>
 </div>
 </header>
 
-<section class="hero shimmer">
-<h1>Ramadhan Sale 2026</h1>
-<p>Elegan • Luxury • Berkelas</p>
+<section class="hero">
+<h1>Ramadhan Luxury 2026</h1>
+<p>Diskon 30% Spesial Ramadhan</p>
 </section>
 
-<!-- BEST SELLER -->
 <section class="section">
 <h2>Best Seller & Unggulan</h2>
-<div class="grid" id="bestSeller"></div>
+<div class="grid" id="best"></div>
 </section>
 
-<!-- GAMIS -->
 <section class="section">
 <h2>Gamis Collection</h2>
 <div class="grid" id="gamis"></div>
 </section>
 
-<!-- CELANA ANAK -->
 <section class="section">
-<h2>Koleksi Celana Anak (8-12 Tahun)</h2>
+<h2>Koleksi Celana Anak</h2>
 <div class="grid" id="anak"></div>
 </section>
 
-<!-- SALE -->
 <section class="sale">
 <h2>RAMADHAN SALE</h2>
-<p>Diskon hingga 30% • Free Gift • Free Ongkir</p>
+<p>Diskon 30% • Free Gift • Free Ongkir</p>
 <p>Katalog: Anak • Dewasa • Couple</p>
-<p>Follow kami: FB | IG | TikTok | WA</p>
+<p>Facebook | Instagram | TikTok | WhatsApp</p>
 <p>Alamat: Jl. Fashion Raya No.21, Jakarta</p>
-</section>
-
-<section class="section">
-<h2>Lokasi Toko</h2>
-<iframe src="https://www.google.com/maps?q=jakarta&output=embed"></iframe>
 </section>
 
 <footer>
 © 2026 Lunatic Fashion Store
 </footer>
 
-<!-- POPUP -->
 <div class="popup" id="popup">
-<div class="popup-content" id="popupContent">
-<span class="close" onclick="closePopup()">×</span>
+<div class="popup-content" id="popupContent"></div>
+</div>
+
+<div class="admin" id="adminPanel">
+<h3>Login Admin</h3>
+<input type="password" id="adminPass" placeholder="Password">
+<button onclick="loginAdmin()">Login</button>
+
+<div id="adminContent" style="display:none">
+
+<div class="dashboard">
+<p>Total Produk: <span id="totalProduk"></span></p>
+<p>Total Terjual: <span id="totalSold"></span></p>
+<p>Total Omzet: Rp <span id="totalRevenue"></span></p>
+</div>
+
+<h3>Tambah Produk</h3>
+<input type="text" id="name" placeholder="Nama">
+<input type="number" id="price" placeholder="Harga">
+<input type="number" id="stock" placeholder="Stok">
+<textarea id="desc" placeholder="Deskripsi"></textarea>
+<input type="file" id="img">
+<select id="cat">
+<option value="best">Best</option>
+<option value="gamis">Gamis</option>
+<option value="anak">Anak</option>
+</select>
+<button onclick="addProduct()">Tambah</button>
+
+<div id="adminList"></div>
+
 </div>
 </div>
 
 <script>
-let cart=0;
+let discount=0.3;
+let cart=[];
 let admin=false;
 
-let products={
-best:[
-{name:"Gamis Royal Emerald",price:"Rp 399.000",desc:"Premium elegant Ramadhan edition",img:"images/best1.jpg"},
-{name:"Couple Gold Edition",price:"Rp 599.000",desc:"Luxury couple set",img:"images/best2.jpg"}
-],
-gamis:[
-{name:"Gamis Olive Luxe",price:"Rp 349.000",desc:"Elegant modern gamis",img:"images/gamis1.jpg"},
-{name:"Gamis Cream Shimmer",price:"Rp 359.000",desc:"Soft cream luxury",img:"images/gamis2.jpg"},
-{name:"Gamis Emerald Silk",price:"Rp 379.000",desc:"Silk premium edition",img:"images/gamis3.jpg"},
-{name:"Gamis Moonlight Gold",price:"Rp 389.000",desc:"Gold accent edition",img:"images/gamis4.jpg"}
-],
-anak:[
-{name:"Celana Kids Olive",price:"Rp 179.000",desc:"Comfort fit",img:"images/anak1.jpg"},
-{name:"Celana Kids Cream",price:"Rp 169.000",desc:"Soft cotton",img:"images/anak2.jpg"},
-{name:"Celana Kids Casual",price:"Rp 159.000",desc:"Daily wear",img:"images/anak3.jpg"},
-{name:"Celana Kids Elegant",price:"Rp 189.000",desc:"Premium kids edition",img:"images/anak4.jpg"}
-]
+let products=JSON.parse(localStorage.getItem("luxuryData"))||{
+best:[],
+gamis:[],
+anak:[]
 };
 
-function render(){
-renderSection("bestSeller",products.best);
-renderSection("gamis",products.gamis);
-renderSection("anak",products.anak);
+function save(){
+localStorage.setItem("luxuryData",JSON.stringify(products));
+render();
+updateDashboard();
 }
 
-function renderSection(id,data){
-let container=document.getElementById(id);
+function render(){
+["best","gamis","anak"].forEach(cat=>{
+let container=document.getElementById(cat);
 container.innerHTML="";
-data.forEach((p,i)=>{
+products[cat].forEach((p,i)=>{
+let finalPrice=Math.round(p.price*(1-discount));
 container.innerHTML+=`
 <div class="card">
-<div class="edit-btn" onclick="editProduct('${id}',${i})">Edit</div>
-<img src="${p.img}" onclick="openPopup('${p.img}','${p.name}','${p.desc}','${p.price}')">
+${p.sold>5?'<div class="badge">Best Seller</div>':''}
+<img src="${p.img}" onclick="showDetail('${cat}',${i})">
 <div class="card-body">
 <h3>${p.name}</h3>
-<div class="price">${p.price}</div>
-<button onclick="addToCart()">Tambah ke Keranjang</button>
+<div class="old-price">Rp ${p.price.toLocaleString()}</div>
+<div class="price">Rp ${finalPrice.toLocaleString()}</div>
+<div class="stock">Stok: ${p.stock}</div>
+<button onclick="addToCart('${cat}',${i})">Tambah</button>
 </div>
 </div>`;
 });
+});
 }
 
-function openPopup(img,name,desc,price){
+function showDetail(cat,i){
+let p=products[cat][i];
+let finalPrice=Math.round(p.price*(1-discount));
 document.getElementById("popup").style.display="flex";
 document.getElementById("popupContent").innerHTML=`
 <span class="close" onclick="closePopup()">×</span>
-<img src="${img}">
-<h2>${name}</h2>
-<p>${desc}</p>
-<h3>${price}</h3>
-<button onclick="addToCart()">Tambah ke Keranjang</button>
+<img src="${p.img}">
+<h2>${p.name}</h2>
+<p>${p.desc}</p>
+<h3>Rp ${finalPrice.toLocaleString()}</h3>
+<button onclick="addToCart('${cat}',${i})">Tambah</button>
 `;
 }
 
@@ -339,30 +333,89 @@ function closePopup(){
 document.getElementById("popup").style.display="none";
 }
 
-function addToCart(){
-cart++;
-document.getElementById("cartCount").innerText=cart;
-alert("Produk ditambahkan!");
+function addToCart(cat,i){
+let p=products[cat][i];
+if(p.stock>0){
+p.stock--;
+p.sold=(p.sold||0)+1;
+cart.push(p);
+save();
+document.getElementById("cartCount").innerText=cart.length;
+}
 }
 
 function openCart(){
-alert("Total produk: "+cart);
+if(cart.length==0){alert("Keranjang kosong");return;}
+let total=cart.reduce((s,i)=>s+Math.round(i.price*(1-discount)),0);
+let text="Halo saya ingin order:%0A";
+cart.forEach(i=>{text+=`- ${i.name}%0A`;});
+text+=`Total: Rp ${total}`;
+window.open(`https://wa.me/6281234567890?text=${text}`);
 }
 
 function toggleAdmin(){
-let pass=prompt("Masukkan Password Admin:");
-if(pass==="lunatic2026"){
-admin=!admin;
-document.body.classList.toggle("admin-mode");
+document.getElementById("adminPanel").classList.toggle("active");
+}
+
+function loginAdmin(){
+if(document.getElementById("adminPass").value==="ramadhan2026"){
+admin=true;
+document.getElementById("adminContent").style.display="block";
+renderAdminList();
+updateDashboard();
 }
 }
 
-function editProduct(section,index){
-let newImg=prompt("Masukkan path foto baru (contoh: images/baru.jpg)");
-if(newImg){
-products[section][index].img=newImg;
-render();
+function addProduct(){
+let reader=new FileReader();
+let file=document.getElementById("img").files[0];
+reader.onload=function(){
+let newData={
+name:name.value,
+price:parseInt(price.value),
+stock:parseInt(stock.value),
+desc:desc.value,
+img:reader.result,
+sold:0
+};
+products[cat.value].push(newData);
+save();
+renderAdminList();
+};
+reader.readAsDataURL(file);
 }
+
+function renderAdminList(){
+let html="";
+["best","gamis","anak"].forEach(cat=>{
+products[cat].forEach((p,i)=>{
+html+=`<div>
+${p.name}
+<button onclick="deleteProduct('${cat}',${i})">Hapus</button>
+</div>`;
+});
+});
+document.getElementById("adminList").innerHTML=html;
+}
+
+function deleteProduct(cat,i){
+products[cat].splice(i,1);
+save();
+renderAdminList();
+}
+
+function updateDashboard(){
+let totalProduk=0,totalSold=0,totalRevenue=0;
+["best","gamis","anak"].forEach(cat=>{
+products[cat].forEach(p=>{
+totalProduk++;
+totalSold+=p.sold||0;
+totalRevenue+=(p.sold||0)*Math.round(p.price*(1-discount));
+});
+});
+document.getElementById("totalProduk").innerText=totalProduk;
+document.getElementById("totalSold").innerText=totalSold;
+document.getElementById("totalRevenue").innerText=totalRevenue.toLocaleString();
 }
 
 render();
@@ -370,3 +423,4 @@ render();
 
 </body>
 </html>
+
