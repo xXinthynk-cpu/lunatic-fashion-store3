@@ -11,97 +11,147 @@
 --cream:#f5f1e6;
 --gold:#d4af37;
 }
+
+*{
+box-sizing:border-box;
+}
+
 body{
 margin:0;
 font-family:sans-serif;
 background:var(--green);
 color:var(--cream);
 }
-header{
-background:var(--green);
-padding:15px;
-text-align:center;
-color:var(--gold);
-position:sticky;
-top:0;
-}
-button{
-background:var(--gold);
-border:none;
-padding:8px 12px;
-margin:5px 0;
-cursor:pointer;
-border-radius:5px;
-}
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-padding:15px;
-}
-.card{
-background:var(--cream);
-color:#000;
-border-radius:10px;
-overflow:hidden;
-}
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
-.card-body{
-padding:10px;
-}
-.admin-panel{
-background:#111;
-padding:15px;
-display:none;
-}
-input,select{
-width:100%;
-padding:6px;
-margin:5px 0;
-}
+
+/* LOGIN */
 .login{
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
 height:100vh;
+padding:20px;
+text-align:center;
 }
-.hidden{display:none;}
+.login input{
+padding:10px;
+margin:8px 0;
+width:100%;
+max-width:300px;
+border:none;
+border-radius:5px;
+}
+button{
+background:var(--gold);
+border:none;
+padding:10px 15px;
+margin:5px 0;
+cursor:pointer;
+border-radius:5px;
+font-weight:bold;
+}
+button:hover{
+opacity:0.9;
+}
+
+/* WEBSITE */
+header{
+padding:15px;
+text-align:center;
+color:var(--gold);
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.header-buttons{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:10px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
+padding:15px;
+}
+
+.card{
+background:var(--cream);
+color:#000;
+border-radius:10px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card-body{
+padding:10px;
+flex:1;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.admin-panel{
+background:#111;
+padding:15px;
+display:none;
+}
+
+input,select{
+width:100%;
+padding:8px;
+margin:6px 0;
+border-radius:5px;
+border:none;
+}
+
+.hidden{
+display:none;
+}
+
+/* RESPONSIVE HP */
+@media(max-width:600px){
+.products{
+grid-template-columns:repeat(2,1fr);
+}
+.card img{
+height:150px;
+}
+}
 </style>
 </head>
 <body>
 
-  <script>
-<!-- LOGIN -->
-function login(){
-let u=document.getElementById("username").value.trim();
-let p=document.getElementById("password").value.trim();
-
-if(u === "admin" && p === "12345"){
-document.getElementById("loginPage").style.display="none";
-document.getElementById("mainPage").classList.remove("hidden");
-}else{
-alert("Username atau Password salah!");
-}
-}
-
-  <script>
-
-  </html>
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="login">
+<h2>Admin Login</h2>
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+<button onclick="login()">Login</button>
+</div>
 
 <!-- WEBSITE -->
 <div id="mainPage" class="hidden">
 
 <header>
 <h1>🌙 Ramadhan Luxury Store</h1>
+
+<div class="header-buttons">
 <button onclick="toggleAdmin()">Admin Panel</button>
+<button onclick="logout()">Logout</button>
+</div>
 </header>
 
-<!-- ADMIN PANEL -->
 <div class="admin-panel" id="adminPanel">
 <h3>Tambah / Edit Produk</h3>
 <input type="hidden" id="editIndex">
@@ -127,7 +177,41 @@ alert("Username atau Password salah!");
 let products=[];
 let imageBase64="";
 
-// LOAD DATA
+/* ================= LOGIN SYSTEM ================= */
+
+function login(){
+let u=document.getElementById("username").value.trim();
+let p=document.getElementById("password").value.trim();
+
+if(u==="admin" && p==="12345"){
+localStorage.setItem("isLoggedIn","true");
+showMain();
+}else{
+alert("Username atau Password salah!");
+}
+}
+
+function logout(){
+localStorage.removeItem("isLoggedIn");
+document.getElementById("mainPage").classList.add("hidden");
+document.getElementById("loginPage").style.display="flex";
+}
+
+function checkLogin(){
+if(localStorage.getItem("isLoggedIn")==="true"){
+showMain();
+}else{
+document.getElementById("loginPage").style.display="flex";
+}
+}
+
+function showMain(){
+document.getElementById("loginPage").style.display="none";
+document.getElementById("mainPage").classList.remove("hidden");
+}
+
+/* ================= DATA ================= */
+
 function loadProducts(){
 let data=localStorage.getItem("products");
 if(data){
@@ -139,52 +223,55 @@ products=[
 ];
 }
 }
+
 function saveToLocal(){
 localStorage.setItem("products",JSON.stringify(products));
 }
 
-// LOGIN
-function login(){
-let u=document.getElementById("username").value;
-let p=document.getElementById("password").value;
-if(u==="admin" && p==="12345"){
-document.getElementById("loginPage").classList.add("hidden");
-document.getElementById("mainPage").classList.remove("hidden");
-}else{
-alert("Login gagal!");
-}
-}
+/* ================= ADMIN ================= */
 
-// ADMIN PANEL
 function toggleAdmin(){
 let panel=document.getElementById("adminPanel");
 panel.style.display=panel.style.display==="block"?"none":"block";
 }
 
-// DISPLAY PRODUK
+/* ================= DISPLAY ================= */
+
 function displayProducts(){
 let list=document.getElementById("productList");
 list.innerHTML="";
+
 products.forEach((p,i)=>{
 let diskon=Math.floor(p.price*0.7);
+
 list.innerHTML+=`
 <div class="card">
 <img src="${p.image}">
 <div class="card-body">
+<div>
 <h4>${p.title}</h4>
 <p><s>Rp ${p.price.toLocaleString()}</s></p>
 <p style="color:red">Rp ${diskon.toLocaleString()}</p>
 <p>Stok: ${p.stock}</p>
+</div>
+<div>
 <button onclick="editProduct(${i})">Edit</button>
 <button onclick="deleteProduct(${i})">Hapus</button>
 <button onclick="buyProduct(${i})">Beli</button>
+</div>
 </div>
 </div>
 `;
 });
 }
 
-// UPLOAD GAMBAR
+/* ================= IMAGE ================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+checkLogin();
+loadProducts();
+displayProducts();
+
 document.getElementById("imageInput").addEventListener("change",function(e){
 let reader=new FileReader();
 reader.onload=function(){
@@ -192,8 +279,10 @@ imageBase64=reader.result;
 };
 reader.readAsDataURL(e.target.files[0]);
 });
+});
 
-// SAVE PRODUK
+/* ================= CRUD ================= */
+
 function saveProduct(){
 let title=document.getElementById("title").value;
 let price=document.getElementById("price").value;
@@ -207,12 +296,12 @@ products.push({title,price:Number(price),stock:Number(stock),category,image:imag
 products[editIndex]={title,price:Number(price),stock:Number(stock),category,image:imageBase64||products[editIndex].image};
 document.getElementById("editIndex").value="";
 }
+
 saveToLocal();
 displayProducts();
 alert("Produk disimpan!");
 }
 
-// EDIT
 function editProduct(i){
 let p=products[i];
 document.getElementById("title").value=p.title;
@@ -223,7 +312,6 @@ document.getElementById("editIndex").value=i;
 toggleAdmin();
 }
 
-// DELETE
 function deleteProduct(i){
 if(confirm("Hapus produk?")){
 products.splice(i,1);
@@ -232,7 +320,6 @@ displayProducts();
 }
 }
 
-// BELI (stok otomatis berkurang)
 function buyProduct(i){
 if(products[i].stock>0){
 products[i].stock--;
@@ -243,9 +330,6 @@ alert("Berhasil beli!");
 alert("Stok habis!");
 }
 }
-
-loadProducts();
-displayProducts();
 
 </script>
 </body>
