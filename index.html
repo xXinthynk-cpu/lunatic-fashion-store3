@@ -3,424 +3,240 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ramadhan Luxury Pro Max</title>
+<title>Ramadhan Luxury Admin</title>
 
 <style>
 :root{
---green:#0f2f25;
---cream:#f6f1e8;
+--green:#0f2e1c;
+--cream:#f5f1e6;
 --gold:#d4af37;
 }
-
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:var(--cream);color:#333}
-
-/* HEADER */
+body{
+margin:0;
+font-family:sans-serif;
+background:var(--green);
+color:var(--cream);
+}
 header{
 background:var(--green);
-color:white;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 25px;
+padding:15px;
+text-align:center;
+color:var(--gold);
 position:sticky;
 top:0;
-z-index:999;
 }
-.logo{color:var(--gold);font-weight:bold}
-.nav-btn{
+button{
 background:var(--gold);
-color:black;
-padding:6px 12px;
-border-radius:20px;
+border:none;
+padding:8px 12px;
+margin:5px 0;
 cursor:pointer;
-margin-left:10px;
+border-radius:5px;
 }
-
-/* HERO */
-.hero{
-height:70vh;
-background:linear-gradient(rgba(15,47,37,.9),rgba(15,47,37,.9)),
-url('https://images.unsplash.com/photo-1600180758890-6b94519a8ba4');
-background-size:cover;
-background-position:center;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-color:white;
-text-align:center;
-position:relative;
-overflow:hidden;
-}
-.hero h1{color:var(--gold);font-size:38px}
-
-/* SHIMMER */
-.hero:before{
-content:"";
-position:absolute;
-top:0;
-left:-75%;
-width:50%;
-height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,215,0,.5),transparent);
-animation:shine 4s infinite;
-}
-@keyframes shine{100%{left:125%}}
-
-/* SECTION */
-.section{padding:50px 20px}
-.section h2{text-align:center;color:var(--green);margin-bottom:25px}
-
-/* GRID */
-.grid{
+.products{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
+gap:15px;
+padding:15px;
 }
-
 .card{
-background:white;
-border-radius:15px;
+background:var(--cream);
+color:#000;
+border-radius:10px;
 overflow:hidden;
-box-shadow:0 6px 20px rgba(0,0,0,.1);
-position:relative;
 }
 .card img{
 width:100%;
-height:260px;
+height:220px;
 object-fit:cover;
-cursor:pointer;
 }
-.card-body{padding:15px}
-.price{color:var(--green);font-weight:bold}
-.old-price{text-decoration:line-through;color:red;font-size:13px}
-.stock{font-size:13px;margin-bottom:8px}
-
-button{
-background:var(--green);
-color:white;
-border:none;
+.card-body{
 padding:10px;
-width:100%;
-border-radius:8px;
-cursor:pointer;
 }
-button:hover{background:var(--gold);color:black}
-
-.badge{
-position:absolute;
-top:10px;
-left:10px;
-background:red;
-color:white;
-padding:4px 8px;
-font-size:12px;
-border-radius:6px;
-}
-
-/* POPUP */
-.popup{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.8);
+.admin-panel{
+background:#111;
+padding:15px;
 display:none;
-justify-content:center;
+}
+input,select{
+width:100%;
+padding:6px;
+margin:5px 0;
+}
+.login{
+display:flex;
+flex-direction:column;
 align-items:center;
-z-index:9999;
+justify-content:center;
+height:100vh;
 }
-.popup-content{
-background:white;
-padding:20px;
-border-radius:15px;
-max-width:500px;
-width:90%;
-position:relative;
-text-align:center;
-}
-.popup-content img{
-width:100%;
-max-height:400px;
-object-fit:cover;
-margin-bottom:15px;
-}
-.close{
-position:absolute;
-top:10px;
-right:15px;
-cursor:pointer;
-font-size:20px;
-}
-
-/* ADMIN PANEL */
-.admin{
-position:fixed;
-right:-400px;
-top:0;
-width:350px;
-height:100%;
-background:white;
-box-shadow:-5px 0 20px rgba(0,0,0,.2);
-padding:20px;
-overflow:auto;
-transition:.4s;
-z-index:99999;
-}
-.admin.active{right:0}
-.admin input,.admin textarea,.admin select{
-width:100%;
-padding:8px;
-margin-bottom:8px;
-}
-
-.dashboard{
-background:#eee;
-padding:10px;
-margin-bottom:10px;
-border-radius:10px;
-}
-
-.sale{
-background:var(--green);
-color:white;
-text-align:center;
-padding:40px 20px;
-}
-.sale h2{color:var(--gold)}
-
-footer{
-background:var(--green);
-color:white;
-text-align:center;
-padding:20px;
-}
+.hidden{display:none;}
 </style>
 </head>
 <body>
 
-<header>
-<div class="logo">Lunatic Fashion Store</div>
-<div>
-<span class="nav-btn" onclick="openCart()">Keranjang (<span id="cartCount">0</span>)</span>
-<span class="nav-btn" onclick="toggleAdmin()">Admin</span>
+<!-- LOGIN -->
+<div class="login" id="loginPage">
+<h2>Login Admin</h2>
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+<button onclick="login()">Login</button>
 </div>
+
+<!-- WEBSITE -->
+<div id="mainPage" class="hidden">
+
+<header>
+<h1>🌙 Ramadhan Luxury Store</h1>
+<button onclick="toggleAdmin()">Admin Panel</button>
 </header>
 
-<section class="hero">
-<h1>Ramadhan Luxury 2026</h1>
-<p>Diskon 30% Spesial Ramadhan</p>
-</section>
-
-<section class="section">
-<h2>Best Seller & Unggulan</h2>
-<div class="grid" id="best"></div>
-</section>
-
-<section class="section">
-<h2>Gamis Collection</h2>
-<div class="grid" id="gamis"></div>
-</section>
-
-<section class="section">
-<h2>Koleksi Celana Anak</h2>
-<div class="grid" id="anak"></div>
-</section>
-
-<section class="sale">
-<h2>RAMADHAN SALE</h2>
-<p>Diskon 30% • Free Gift • Free Ongkir</p>
-<p>Katalog: Anak • Dewasa • Couple</p>
-<p>Facebook | Instagram | TikTok | WhatsApp</p>
-<p>Alamat: Jl. Fashion Raya No.21, Jakarta</p>
-</section>
-
-<footer>
-© 2026 Lunatic Fashion Store
-</footer>
-
-<div class="popup" id="popup">
-<div class="popup-content" id="popupContent"></div>
-</div>
-
-<div class="admin" id="adminPanel">
-<h3>Login Admin</h3>
-<input type="password" id="adminPass" placeholder="Password">
-<button onclick="loginAdmin()">Login</button>
-
-<div id="adminContent" style="display:none">
-
-<div class="dashboard">
-<p>Total Produk: <span id="totalProduk"></span></p>
-<p>Total Terjual: <span id="totalSold"></span></p>
-<p>Total Omzet: Rp <span id="totalRevenue"></span></p>
-</div>
-
-<h3>Tambah Produk</h3>
-<input type="text" id="name" placeholder="Nama">
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+<h3>Tambah / Edit Produk</h3>
+<input type="hidden" id="editIndex">
+<input type="text" id="title" placeholder="Nama Produk">
 <input type="number" id="price" placeholder="Harga">
 <input type="number" id="stock" placeholder="Stok">
-<textarea id="desc" placeholder="Deskripsi"></textarea>
-<input type="file" id="img">
-<select id="cat">
-<option value="best">Best</option>
+<select id="category">
+<option value="featured">Featured</option>
 <option value="gamis">Gamis</option>
-<option value="anak">Anak</option>
+<option value="anak">Celana Anak</option>
 </select>
-<button onclick="addProduct()">Tambah</button>
-
-<div id="adminList"></div>
-
+<input type="file" id="imageInput">
+<button onclick="saveProduct()">Simpan Produk</button>
 </div>
+
+<h2 style="text-align:center">Produk</h2>
+<div class="products" id="productList"></div>
+
 </div>
 
 <script>
-let discount=0.3;
-let cart=[];
-let admin=false;
 
-let products=JSON.parse(localStorage.getItem("luxuryData"))||{
-best:[],
-gamis:[],
-anak:[]
-};
+let products=[];
+let imageBase64="";
 
-function save(){
-localStorage.setItem("luxuryData",JSON.stringify(products));
-render();
-updateDashboard();
+// LOAD DATA
+function loadProducts(){
+let data=localStorage.getItem("products");
+if(data){
+products=JSON.parse(data);
+}else{
+products=[
+{title:"Gamis Emerald",price:300000,stock:10,category:"featured",image:"https://picsum.photos/400?1"},
+{title:"Couple Set",price:500000,stock:8,category:"featured",image:"https://picsum.photos/400?2"}
+];
+}
+}
+function saveToLocal(){
+localStorage.setItem("products",JSON.stringify(products));
 }
 
-function render(){
-["best","gamis","anak"].forEach(cat=>{
-let container=document.getElementById(cat);
-container.innerHTML="";
-products[cat].forEach((p,i)=>{
-let finalPrice=Math.round(p.price*(1-discount));
-container.innerHTML+=`
-<div class="card">
-${p.sold>5?'<div class="badge">Best Seller</div>':''}
-<img src="${p.img}" onclick="showDetail('${cat}',${i})">
-<div class="card-body">
-<h3>${p.name}</h3>
-<div class="old-price">Rp ${p.price.toLocaleString()}</div>
-<div class="price">Rp ${finalPrice.toLocaleString()}</div>
-<div class="stock">Stok: ${p.stock}</div>
-<button onclick="addToCart('${cat}',${i})">Tambah</button>
-</div>
-</div>`;
-});
-});
-}
-
-function showDetail(cat,i){
-let p=products[cat][i];
-let finalPrice=Math.round(p.price*(1-discount));
-document.getElementById("popup").style.display="flex";
-document.getElementById("popupContent").innerHTML=`
-<span class="close" onclick="closePopup()">×</span>
-<img src="${p.img}">
-<h2>${p.name}</h2>
-<p>${p.desc}</p>
-<h3>Rp ${finalPrice.toLocaleString()}</h3>
-<button onclick="addToCart('${cat}',${i})">Tambah</button>
-`;
-}
-
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
-
-function addToCart(cat,i){
-let p=products[cat][i];
-if(p.stock>0){
-p.stock--;
-p.sold=(p.sold||0)+1;
-cart.push(p);
-save();
-document.getElementById("cartCount").innerText=cart.length;
+// LOGIN
+function login(){
+let u=document.getElementById("username").value;
+let p=document.getElementById("password").value;
+if(u==="admin" && p==="12345"){
+document.getElementById("loginPage").classList.add("hidden");
+document.getElementById("mainPage").classList.remove("hidden");
+}else{
+alert("Login gagal!");
 }
 }
 
-function openCart(){
-if(cart.length==0){alert("Keranjang kosong");return;}
-let total=cart.reduce((s,i)=>s+Math.round(i.price*(1-discount)),0);
-let text="Halo saya ingin order:%0A";
-cart.forEach(i=>{text+=`- ${i.name}%0A`;});
-text+=`Total: Rp ${total}`;
-window.open(`https://wa.me/6281234567890?text=${text}`);
-}
-
+// ADMIN PANEL
 function toggleAdmin(){
-document.getElementById("adminPanel").classList.toggle("active");
+let panel=document.getElementById("adminPanel");
+panel.style.display=panel.style.display==="block"?"none":"block";
 }
 
-function loginAdmin(){
-if(document.getElementById("adminPass").value==="ramadhan2026"){
-admin=true;
-document.getElementById("adminContent").style.display="block";
-renderAdminList();
-updateDashboard();
-}
+// DISPLAY PRODUK
+function displayProducts(){
+let list=document.getElementById("productList");
+list.innerHTML="";
+products.forEach((p,i)=>{
+let diskon=Math.floor(p.price*0.7);
+list.innerHTML+=`
+<div class="card">
+<img src="${p.image}">
+<div class="card-body">
+<h4>${p.title}</h4>
+<p><s>Rp ${p.price.toLocaleString()}</s></p>
+<p style="color:red">Rp ${diskon.toLocaleString()}</p>
+<p>Stok: ${p.stock}</p>
+<button onclick="editProduct(${i})">Edit</button>
+<button onclick="deleteProduct(${i})">Hapus</button>
+<button onclick="buyProduct(${i})">Beli</button>
+</div>
+</div>
+`;
+});
 }
 
-function addProduct(){
+// UPLOAD GAMBAR
+document.getElementById("imageInput").addEventListener("change",function(e){
 let reader=new FileReader();
-let file=document.getElementById("img").files[0];
 reader.onload=function(){
-let newData={
-name:name.value,
-price:parseInt(price.value),
-stock:parseInt(stock.value),
-desc:desc.value,
-img:reader.result,
-sold:0
+imageBase64=reader.result;
 };
-products[cat.value].push(newData);
-save();
-renderAdminList();
-};
-reader.readAsDataURL(file);
+reader.readAsDataURL(e.target.files[0]);
+});
+
+// SAVE PRODUK
+function saveProduct(){
+let title=document.getElementById("title").value;
+let price=document.getElementById("price").value;
+let stock=document.getElementById("stock").value;
+let category=document.getElementById("category").value;
+let editIndex=document.getElementById("editIndex").value;
+
+if(editIndex===""){
+products.push({title,price:Number(price),stock:Number(stock),category,image:imageBase64});
+}else{
+products[editIndex]={title,price:Number(price),stock:Number(stock),category,image:imageBase64||products[editIndex].image};
+document.getElementById("editIndex").value="";
+}
+saveToLocal();
+displayProducts();
+alert("Produk disimpan!");
 }
 
-function renderAdminList(){
-let html="";
-["best","gamis","anak"].forEach(cat=>{
-products[cat].forEach((p,i)=>{
-html+=`<div>
-${p.name}
-<button onclick="deleteProduct('${cat}',${i})">Hapus</button>
-</div>`;
-});
-});
-document.getElementById("adminList").innerHTML=html;
+// EDIT
+function editProduct(i){
+let p=products[i];
+document.getElementById("title").value=p.title;
+document.getElementById("price").value=p.price;
+document.getElementById("stock").value=p.stock;
+document.getElementById("category").value=p.category;
+document.getElementById("editIndex").value=i;
+toggleAdmin();
 }
 
-function deleteProduct(cat,i){
-products[cat].splice(i,1);
-save();
-renderAdminList();
+// DELETE
+function deleteProduct(i){
+if(confirm("Hapus produk?")){
+products.splice(i,1);
+saveToLocal();
+displayProducts();
+}
 }
 
-function updateDashboard(){
-let totalProduk=0,totalSold=0,totalRevenue=0;
-["best","gamis","anak"].forEach(cat=>{
-products[cat].forEach(p=>{
-totalProduk++;
-totalSold+=p.sold||0;
-totalRevenue+=(p.sold||0)*Math.round(p.price*(1-discount));
-});
-});
-document.getElementById("totalProduk").innerText=totalProduk;
-document.getElementById("totalSold").innerText=totalSold;
-document.getElementById("totalRevenue").innerText=totalRevenue.toLocaleString();
+// BELI (stok otomatis berkurang)
+function buyProduct(i){
+if(products[i].stock>0){
+products[i].stock--;
+saveToLocal();
+displayProducts();
+alert("Berhasil beli!");
+}else{
+alert("Stok habis!");
+}
 }
 
-render();
+loadProducts();
+displayProducts();
+
 </script>
-
 </body>
 </html>
-
