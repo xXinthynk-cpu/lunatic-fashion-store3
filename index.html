@@ -3,188 +3,231 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LuxMarket - Mini Marketplace</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>LuxeFashion Market</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
-body {
-    background: #f5f6fa;
+body{
+    background:#f4f6f9;
 }
 
 /* NAVBAR */
-.navbar {
-    background: white;
-    padding: 15px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+.navbar{
+    background:white;
+    padding:15px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-.logo {
-    font-size: 22px;
-    font-weight: 700;
-    color: #333;
+.logo{
+    font-size:22px;
+    font-weight:700;
+    color:#2c3e50;
 }
 
-.search-bar input {
-    padding: 8px 15px;
-    width: 300px;
-    border-radius: 30px;
-    border: 1px solid #ddd;
+.search input{
+    padding:10px 15px;
+    width:300px;
+    border-radius:30px;
+    border:1px solid #ddd;
 }
 
-.menu a {
-    text-decoration: none;
-    margin-left: 20px;
-    color: #555;
-    font-weight: 500;
+.menu a{
+    text-decoration:none;
+    margin-left:20px;
+    color:#333;
+    font-weight:500;
 }
 
 /* HERO */
-.hero {
-    background: linear-gradient(120deg,#2c3e50,#34495e);
-    color: white;
-    padding: 80px 5%;
-    text-align: center;
+.hero{
+    background:linear-gradient(120deg,#1f2937,#374151);
+    color:white;
+    padding:90px 5%;
+    text-align:center;
 }
 
-.hero h1 {
-    font-size: 40px;
+.hero h1{
+    font-size:42px;
+    font-weight:700;
 }
 
-.hero p {
-    margin-top: 10px;
-    font-size: 18px;
+.hero p{
+    margin-top:10px;
+    font-size:18px;
+    opacity:0.9;
 }
 
-.hero button {
-    margin-top: 20px;
-    padding: 12px 30px;
-    border: none;
-    background: gold;
-    color: black;
-    font-weight: 600;
-    border-radius: 30px;
-    cursor: pointer;
+.hero button{
+    margin-top:25px;
+    padding:14px 35px;
+    border:none;
+    border-radius:30px;
+    background:gold;
+    font-weight:600;
+    cursor:pointer;
 }
 
 /* CATEGORY */
-.categories {
-    padding: 40px 5%;
-    display: flex;
-    justify-content: space-between;
+.categories{
+    padding:50px 5%;
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
 }
 
-.category {
-    background: white;
-    padding: 20px;
-    width: 23%;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    cursor: pointer;
-    transition: 0.3s;
+.category{
+    flex:1;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    transition:0.3s;
+    cursor:pointer;
 }
 
-.category:hover {
-    transform: translateY(-5px);
+.category:hover{
+    transform:translateY(-8px);
+}
+
+.category span{
+    font-size:40px;
+}
+
+.category h4{
+    margin-top:10px;
 }
 
 /* PRODUCTS */
-.products {
-    padding: 40px 5%;
+.products{
+    padding:50px 5%;
 }
 
-.products h2 {
-    margin-bottom: 20px;
+.products h2{
+    margin-bottom:25px;
 }
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 20px;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:25px;
 }
 
-.product {
-    background: white;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: 0.3s;
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    transition:0.3s;
+    position:relative;
 }
 
-.product:hover {
-    transform: translateY(-5px);
+.card:hover{
+    transform:translateY(-8px);
 }
 
-.product img {
-    width: 100%;
-    border-radius: 10px;
+.badge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:#e74c3c;
+    color:white;
+    padding:5px 10px;
+    font-size:12px;
+    border-radius:20px;
 }
 
-.price {
-    color: #e74c3c;
-    font-weight: 600;
+.card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
 }
 
-.old-price {
-    text-decoration: line-through;
-    color: gray;
-    font-size: 13px;
+.card-body{
+    padding:15px;
 }
 
-.rating {
-    color: orange;
-    font-size: 14px;
+.price{
+    color:#e74c3c;
+    font-weight:600;
 }
 
-.product button {
-    margin-top: 10px;
-    width: 100%;
-    padding: 8px;
-    background: #2c3e50;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+.old{
+    text-decoration:line-through;
+    color:gray;
+    font-size:13px;
+}
+
+.rating{
+    color:orange;
+    font-size:14px;
+    margin:5px 0;
+}
+
+.card button{
+    width:100%;
+    padding:10px;
+    border:none;
+    background:#2c3e50;
+    color:white;
+    border-radius:8px;
+    margin-top:10px;
+    cursor:pointer;
 }
 
 /* PROMO */
-.promo {
-    background: #ffeaa7;
-    padding: 40px 5%;
-    text-align: center;
+.promo{
+    background:#ffeaa7;
+    padding:60px 5%;
+    text-align:center;
+    margin-top:40px;
+}
+
+.promo h2{
+    font-size:30px;
 }
 
 /* FOOTER */
-footer {
-    background: #2c3e50;
-    color: white;
-    padding: 30px 5%;
-    text-align: center;
-    margin-top: 40px;
+footer{
+    background:#1f2937;
+    color:white;
+    padding:40px 5%;
+    margin-top:40px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+footer h4{
+    margin-bottom:10px;
+}
+
+footer p{
+    font-size:14px;
+    opacity:0.8;
 }
 
 @media(max-width:768px){
     .categories{
-        flex-direction: column;
-        gap: 15px;
+        flex-direction:column;
     }
-    .category{
-        width: 100%;
-    }
-    .search-bar input{
-        width: 150px;
+    .search input{
+        width:150px;
     }
 }
 </style>
@@ -193,63 +236,81 @@ footer {
 
 <!-- NAVBAR -->
 <div class="navbar">
-    <div class="logo">LuxMarket</div>
-    <div class="search-bar">
+    <div class="logo">LuxeFashion</div>
+    <div class="search">
         <input type="text" placeholder="Cari produk...">
     </div>
     <div class="menu">
         <a href="#">Home</a>
         <a href="#">Kategori</a>
+        <a href="#">Promo</a>
         <a href="#">Keranjang</a>
-        <a href="#">Login</a>
     </div>
 </div>
 
 <!-- HERO -->
 <div class="hero">
     <h1>Marketplace Fashion Modern</h1>
-    <p>Temukan koleksi terbaik dengan harga spesial</p>
+    <p>Koleksi Gamis, Couple & Fashion Trendy dengan Harga Terbaik</p>
     <button>Belanja Sekarang</button>
 </div>
 
 <!-- CATEGORY -->
 <div class="categories">
-    <div class="category">Gamis</div>
-    <div class="category">Couple</div>
-    <div class="category">Anak-anak</div>
-    <div class="category">Aksesoris</div>
+    <div class="category">
+        <span>👗</span>
+        <h4>Gamis</h4>
+    </div>
+    <div class="category">
+        <span>👨‍👩‍👧</span>
+        <h4>Couple</h4>
+    </div>
+    <div class="category">
+        <span>🧒</span>
+        <h4>Anak-anak</h4>
+    </div>
+    <div class="category">
+        <span>👜</span>
+        <h4>Aksesoris</h4>
+    </div>
 </div>
 
 <!-- PRODUCTS -->
 <div class="products">
     <h2>Produk Terlaris 🔥</h2>
-    <div class="product-grid">
-        
-        <div class="product">
-            <img src="https://via.placeholder.com/300x300" alt="">
-            <h4>Gamis Modern Elegan</h4>
-            <div class="rating">⭐⭐⭐⭐☆ (120)</div>
-            <div class="price">Rp199.000</div>
-            <div class="old-price">Rp249.000</div>
-            <button>Tambah ke Keranjang</button>
+    <div class="grid">
+
+        <div class="card">
+            <div class="badge">-20%</div>
+            <img src="https://via.placeholder.com/300x400" alt="">
+            <div class="card-body">
+                <h4>Gamis Elegan Modern</h4>
+                <div class="rating">⭐⭐⭐⭐☆ (120)</div>
+                <div class="price">Rp199.000 <span class="old">Rp249.000</span></div>
+                <button>Tambah ke Keranjang</button>
+            </div>
         </div>
 
-        <div class="product">
-            <img src="https://via.placeholder.com/300x300" alt="">
-            <h4>Gamis Couple Family</h4>
-            <div class="rating">⭐⭐⭐⭐⭐ (85)</div>
-            <div class="price">Rp349.000</div>
-            <div class="old-price">Rp420.000</div>
-            <button>Tambah ke Keranjang</button>
+        <div class="card">
+            <div class="badge">-15%</div>
+            <img src="https://via.placeholder.com/300x400" alt="">
+            <div class="card-body">
+                <h4>Couple Family Premium</h4>
+                <div class="rating">⭐⭐⭐⭐⭐ (85)</div>
+                <div class="price">Rp349.000 <span class="old">Rp420.000</span></div>
+                <button>Tambah ke Keranjang</button>
+            </div>
         </div>
 
-        <div class="product">
-            <img src="https://via.placeholder.com/300x300" alt="">
-            <h4>Dress Anak Trendy</h4>
-            <div class="rating">⭐⭐⭐⭐☆ (60)</div>
-            <div class="price">Rp129.000</div>
-            <div class="old-price">Rp170.000</div>
-            <button>Tambah ke Keranjang</button>
+        <div class="card">
+            <div class="badge">-10%</div>
+            <img src="https://via.placeholder.com/300x400" alt="">
+            <div class="card-body">
+                <h4>Dress Anak Trendy</h4>
+                <div class="rating">⭐⭐⭐⭐☆ (60)</div>
+                <div class="price">Rp129.000 <span class="old">Rp170.000</span></div>
+                <button>Tambah ke Keranjang</button>
+            </div>
         </div>
 
     </div>
@@ -257,13 +318,29 @@ footer {
 
 <!-- PROMO -->
 <div class="promo">
-    <h2>Diskon Hingga 50%!</h2>
-    <p>Promo terbatas hanya minggu ini</p>
+    <h2>Diskon Hingga 50% Minggu Ini!</h2>
+    <p>Belanja sekarang dan dapatkan promo terbatas</p>
 </div>
 
 <!-- FOOTER -->
 <footer>
-    <p>© 2026 LuxMarket. All Rights Reserved.</p>
+    <div class="footer-grid">
+        <div>
+            <h4>LuxeFashion</h4>
+            <p>Marketplace fashion modern dengan kualitas premium.</p>
+        </div>
+        <div>
+            <h4>Bantuan</h4>
+            <p>FAQ</p>
+            <p>Pengiriman</p>
+            <p>Kebijakan Refund</p>
+        </div>
+        <div>
+            <h4>Kontak</h4>
+            <p>Email: support@luxefashion.com</p>
+            <p>Instagram: @luxefashion</p>
+        </div>
+    </div>
 </footer>
 
 </body>
