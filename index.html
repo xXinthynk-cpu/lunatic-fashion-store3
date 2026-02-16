@@ -19,15 +19,40 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:var(--darkgreen);color:white;overflow-x:hidden}
 
-/* ================= HERO ================= */
+/* NAVBAR */
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(14,43,38,0.95);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 8%;
+z-index:1000;
+}
+
+nav h2{
+color:var(--gold);
+font-family:'Playfair Display';
+}
+
+.nav-btns button{
+margin-left:10px;
+padding:6px 12px;
+font-size:13px;
+}
+
+/* HERO */
 .hero{
 position:relative;
-height:100vh;
+height:80vh;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
 overflow:hidden;
+margin-top:60px;
 }
 
 .hero img{
@@ -50,9 +75,10 @@ z-index:2;
 .hero-content{
 position:relative;
 z-index:3;
-animation:fadeSlide 1.8s ease forwards;
+animation:fadeSlide 1.5s ease forwards;
 opacity:0;
-transform:translateY(40px);
+transform:translateY(30px);
+padding:0 20px;
 }
 
 @keyframes fadeSlide{
@@ -60,203 +86,195 @@ to{opacity:1;transform:translateY(0);}
 }
 
 .hero h1{
-font-size:60px;
+font-size:40px;
 color:var(--gold);
 font-family:'Playfair Display';
-letter-spacing:3px;
 }
 
-.hero p{margin-top:15px;font-size:18px;color:var(--cream);}
+.hero p{margin-top:10px;color:var(--cream);font-size:14px;}
 
 .promo{
-margin:30px auto;
-padding:15px 25px;
+margin:15px auto;
+padding:10px 20px;
 background:rgba(0,0,0,0.6);
 border:1px solid var(--gold);
-border-radius:10px;
-width:fit-content;
-}
-
-.promo span{
-color:var(--gold);
-font-weight:bold;
-font-size:22px;
-}
-
-.hero button{
-margin-top:20px;
-padding:12px 25px;
-border:none;
-background:var(--gold);
-font-weight:bold;
-cursor:pointer;
 border-radius:8px;
+font-size:14px;
 }
 
-/* SHIMMER GOLD */
-@keyframes shimmer{
-0%{background-position:-500px 0;}
-100%{background-position:500px 0;}
+.promo span{color:var(--gold);font-weight:bold;}
+
+/* QUICK NAV BUTTONS */
+.quick-nav{
+display:flex;
+justify-content:center;
+gap:10px;
+margin:20px 0;
+flex-wrap:wrap;
 }
 
-.gold-shimmer{
-background:linear-gradient(90deg,#d4af37,#fff8dc,#d4af37);
-background-size:400px 100%;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:shimmer 3s infinite linear;
+.quick-nav button{
+background:var(--maroon);
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:20px;
+font-size:13px;
+cursor:pointer;
 }
 
-/* ================= PRODUCTS ================= */
-.section{padding:70px 8%;}
-.section h2{text-align:center;margin-bottom:40px;color:var(--gold);font-family:'Playfair Display';}
+/* PRODUCTS */
+.section{padding:40px 6%;}
+.section h2{text-align:center;margin-bottom:25px;color:var(--gold);font-family:'Playfair Display';font-size:22px;}
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
 }
 
 .card{
 background:#132f29;
-border-radius:15px;
+border-radius:12px;
 overflow:hidden;
-box-shadow:0 0 20px rgba(212,175,55,0.2);
-transition:0.4s;
 position:relative;
-}
-
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 30px rgba(212,175,55,0.5);
 }
 
 .card img{
 width:100%;
-height:280px;
+height:180px;
 object-fit:cover;
 cursor:pointer;
 }
 
 .badge{
 position:absolute;
-top:10px;
-left:10px;
+top:8px;
+left:8px;
 background:var(--maroon);
-padding:5px 10px;
-font-size:12px;
-border-radius:5px;
+padding:4px 8px;
+font-size:10px;
+border-radius:4px;
 }
 
-.card-body{padding:20px;}
+.card-body{padding:10px;font-size:13px;}
 
-.old{text-decoration:line-through;color:#aaa;font-size:14px;}
-.price{color:var(--gold);font-weight:bold;}
+.old{text-decoration:line-through;color:#aaa;font-size:11px;}
+.price{color:var(--gold);font-weight:bold;font-size:13px;}
 
 button{
-padding:10px 15px;
+padding:6px 10px;
 border:none;
 background:var(--gold);
 color:black;
 cursor:pointer;
-margin-top:10px;
-border-radius:8px;
-font-weight:bold;
+margin-top:6px;
+border-radius:6px;
+font-size:12px;
 }
 
-/* ================= CART ================= */
+/* CART */
 .cart-toggle{
 position:fixed;
-top:20px;
-right:20px;
+top:15px;
+right:15px;
 background:var(--gold);
-padding:10px 15px;
-border-radius:50px;
+padding:8px 12px;
+border-radius:20px;
 cursor:pointer;
-font-weight:bold;
-z-index:1000;
+font-size:13px;
+z-index:2000;
 }
 
 .cart{
 position:fixed;
 top:0;
-right:-400px;
-width:350px;
+right:-100%;
+width:80%;
 height:100vh;
 background:linear-gradient(180deg,#0e2b26,#4b2e2e);
-box-shadow:-5px 0 20px rgba(0,0,0,0.5);
-transition:0.5s;
+transition:0.4s;
 padding:20px;
-z-index:999;
+z-index:1500;
 overflow:auto;
 }
 
 .cart.active{right:0;}
 
 .cart h3{color:var(--gold);}
-.cart-item{margin:15px 0;border-bottom:1px solid #444;padding-bottom:10px;}
+.cart-item{margin:10px 0;font-size:13px;}
 
-/* ================= POPUP ================= */
+/* POPUP */
 .popup{
 position:fixed;
 top:0;left:0;
 width:100%;height:100%;
-background:rgba(0,0,0,0.85);
+background:rgba(0,0,0,0.9);
 display:none;
 align-items:center;
 justify-content:center;
-z-index:9999;
+z-index:3000;
 }
 
 .popup img{
-max-width:90%;
-max-height:90%;
+max-width:95%;
+max-height:95%;
 }
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer{
 background:var(--brown);
-padding:40px 10%;
+padding:30px 6%;
 text-align:center;
+font-size:13px;
 }
 
-footer a{
-color:var(--gold);
-text-decoration:none;
-}
+footer a{color:var(--gold);text-decoration:none;}
 
-footer a:hover{text-decoration:underline;}
+@media(min-width:768px){
+.hero{height:100vh;}
+.hero h1{font-size:60px;}
+.grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));}
+.card img{height:280px;}
+}
 </style>
 </head>
 
 <body>
 
+<nav>
+<h2>ARQÉNZA</h2>
+<div class="nav-btns">
+<button onclick="scrollToSection('best')">Best</button>
+<button onclick="scrollToSection('gamis')">Gamis</button>
+<button onclick="scrollToSection('celana')">Celana</button>
+</div>
+</nav>
+
 <div class="cart-toggle" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
+
 <div class="cart" id="cart">
-<h3>Keranjang Belanja</h3>
+<h3>Keranjang</h3>
 <div id="cart-items"></div>
 </div>
 
-<!-- HERO -->
 <section class="hero">
 <img src="banner.jpg">
 <div class="hero-content">
-<h1 class="gold-shimmer">ARQÉNZA</h1>
-<p>Luxury Gamis & Elegant Pants For Modern Generation</p>
-
-<div class="promo">
-🔥 GRAND OPENING 🔥 Diskon Hingga <span>50%</span>
-</div>
-
-<button onclick="document.getElementById('best').scrollIntoView({behavior:'smooth'})">
-Lihat Koleksi
-</button>
+<h1>Premium Fashion 2026</h1>
+<p>Luxury Gamis & Elegant Pants</p>
+<div class="promo">🔥 Diskon Hingga <span>50%</span></div>
 </div>
 </section>
 
-<!-- PRODUCTS -->
+<div class="quick-nav">
+<button onclick="scrollToSection('best')">Best Seller</button>
+<button onclick="scrollToSection('gamis')">Gamis</button>
+<button onclick="scrollToSection('celana')">Celana</button>
+</div>
+
 <section class="section">
-<h2>Best Seller & Unggulan</h2>
+<h2>Best Seller</h2>
 <div class="grid" id="best"></div>
 </section>
 
@@ -270,17 +288,13 @@ Lihat Koleksi
 <div class="grid" id="celana"></div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-<h3>ARQÉNZA Luxury Fashion</h3>
-<p>📍 Jl. Fashion Premium No.88, Jakarta</p>
-<p>📷 IG: <a href="#">@arqenza.official</a></p>
-<p>💬 WA: <a href="https://wa.me/6281234567890">Chat WhatsApp</a></p>
-<p>📘 FB: <a href="#">ARQÉNZA Official</a></p>
-<p style="margin-top:20px;">© 2026 All Rights Reserved</p>
+<p>📍 Jl. Fashion Premium No.88 Jakarta</p>
+<p>IG: <a href="#">@arqenza</a></p>
+<p>WA: <a href="https://wa.me/6281234567890">Chat WhatsApp</a></p>
+<p>FB: <a href="#">ARQÉNZA Official</a></p>
 </footer>
 
-<!-- POPUP -->
 <div class="popup" id="popup" onclick="closePopup()">
 <img id="popup-img">
 </div>
@@ -288,31 +302,30 @@ Lihat Koleksi
 <script>
 let cart=[]
 const products=[
-{title:"Gamis Royal Emerald",price:450000,discount:20,category:"best",image:"https://images.unsplash.com/photo-1520975918318-7cba0a2f4f4f",desc:"Gamis premium satin silk."},
-{title:"Celana Premium Gold Line",price:350000,discount:15,category:"best",image:"https://images.unsplash.com/photo-1516826957135-700dedea698c",desc:"Celana luxury formal."},
-{title:"Gamis Maroon Elegance",price:400000,discount:10,category:"gamis",image:"https://images.unsplash.com/photo-1495121605193-b116b5b09a3c",desc:"Modern maroon design."},
-{title:"Gamis Dark Green Series",price:380000,discount:12,category:"gamis",image:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb",desc:"Exclusive dark green."},
-{title:"Gamis Gold Accent",price:420000,discount:18,category:"gamis",image:"https://images.unsplash.com/photo-1520975661595-6453be3f7070",desc:"Gold limited edition."},
-{title:"Gamis Classic Brown",price:370000,discount:10,category:"gamis",image:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91",desc:"Brown elegant series."},
-{title:"Celana Anak Trendy",price:200000,discount:5,category:"celana",image:"https://images.unsplash.com/photo-1520975918318-7cba0a2f4f4f",desc:"Comfortable kids pants."},
-{title:"Celana Slim Dewasa",price:300000,discount:8,category:"celana",image:"https://images.unsplash.com/photo-1516826957135-700dedea698c",desc:"Slim fit premium."},
-{title:"Celana Brown Edition",price:320000,discount:12,category:"celana",image:"https://images.unsplash.com/photo-1495121605193-b116b5b09a3c",desc:"Brown premium edition."},
-{title:"Celana Gold Stripe",price:340000,discount:20,category:"celana",image:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb",desc:"Luxury gold stripe."}
+{title:"Gamis Royal",price:450000,discount:20,category:"best",image:"https://images.unsplash.com/photo-1520975918318-7cba0a2f4f4f"},
+{title:"Celana Premium",price:350000,discount:15,category:"best",image:"https://images.unsplash.com/photo-1516826957135-700dedea698c"},
+{title:"Gamis Maroon",price:400000,discount:10,category:"gamis",image:"https://images.unsplash.com/photo-1495121605193-b116b5b09a3c"},
+{title:"Gamis Green",price:380000,discount:12,category:"gamis",image:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb"},
+{title:"Gamis Gold",price:420000,discount:18,category:"gamis",image:"https://images.unsplash.com/photo-1520975661595-6453be3f7070"},
+{title:"Gamis Brown",price:370000,discount:10,category:"gamis",image:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91"},
+{title:"Celana Anak",price:200000,discount:5,category:"celana",image:"https://images.unsplash.com/photo-1520975918318-7cba0a2f4f4f"},
+{title:"Celana Slim",price:300000,discount:8,category:"celana",image:"https://images.unsplash.com/photo-1516826957135-700dedea698c"},
+{title:"Celana Brown",price:320000,discount:12,category:"celana",image:"https://images.unsplash.com/photo-1495121605193-b116b5b09a3c"},
+{title:"Celana Gold",price:340000,discount:20,category:"celana",image:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb"}
 ]
 
 function render(){
 products.forEach(p=>{
-let finalPrice=p.price-(p.price*p.discount/100)
+let final=p.price-(p.price*p.discount/100)
 let html=`
 <div class="card">
 <div class="badge">${p.discount}% OFF</div>
 <img src="${p.image}" onclick="openPopup('${p.image}')">
 <div class="card-body">
 <h4>${p.title}</h4>
-<p>${p.desc}</p>
 <div class="old">Rp ${p.price.toLocaleString()}</div>
-<div class="price">Rp ${finalPrice.toLocaleString()}</div>
-<button onclick="addCart('${p.title}',${finalPrice})">Tambah Keranjang</button>
+<div class="price">Rp ${final.toLocaleString()}</div>
+<button onclick="addCart('${p.title}',${final})">Tambah</button>
 </div>
 </div>`
 document.getElementById(p.category).innerHTML+=html
@@ -328,6 +341,7 @@ document.getElementById("cart-items").innerHTML+=`<div class="cart-item">${title
 function toggleCart(){document.getElementById("cart").classList.toggle("active")}
 function openPopup(src){document.getElementById("popup-img").src=src;document.getElementById("popup").style.display="flex"}
 function closePopup(){document.getElementById("popup").style.display="none"}
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
 
 render()
 </script>
