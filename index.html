@@ -3,345 +3,346 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LuxeFashion Market</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Luxury Fashion Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+:root{
+--darkgreen:#0f2e25;
+--maroon:#6d1f2f;
+--gold:#d4af37;
+--brown:#4b2e2e;
+--white:#f5f5f5;
 }
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 
 body{
-    background:#f4f6f9;
+background:linear-gradient(135deg,var(--darkgreen),var(--brown));
+color:var(--white);
+overflow-x:hidden;
 }
 
-/* NAVBAR */
-.navbar{
-    background:white;
-    padding:15px 5%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 2px 10px rgba(0,0,0,0.05);
-    position:sticky;
-    top:0;
-    z-index:100;
+/* Navbar */
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(10px);
+position:sticky;
+top:0;
+z-index:1000;
 }
 
 .logo{
-    font-size:22px;
-    font-weight:700;
-    color:#2c3e50;
+font-family:'Playfair Display',serif;
+font-size:24px;
+color:var(--gold);
 }
 
-.search input{
-    padding:10px 15px;
-    width:300px;
-    border-radius:30px;
-    border:1px solid #ddd;
+.cart-btn{
+background:var(--maroon);
+padding:10px 20px;
+border-radius:30px;
+cursor:pointer;
+transition:0.3s;
 }
 
-.menu a{
-    text-decoration:none;
-    margin-left:20px;
-    color:#333;
-    font-weight:500;
+.cart-btn:hover{
+background:var(--gold);
+color:black;
 }
 
-/* HERO */
+/* Hero */
 .hero{
-    background:linear-gradient(120deg,#1f2937,#374151);
-    color:white;
-    padding:90px 5%;
-    text-align:center;
+height:80vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:radial-gradient(circle at center,var(--maroon),var(--darkgreen));
+animation:luxGlow 5s infinite alternate;
+}
+
+@keyframes luxGlow{
+from{filter:brightness(1)}
+to{filter:brightness(1.2)}
 }
 
 .hero h1{
-    font-size:42px;
-    font-weight:700;
+font-size:42px;
+font-family:'Playfair Display',serif;
+color:var(--gold);
 }
 
-.hero p{
-    margin-top:10px;
-    font-size:18px;
-    opacity:0.9;
+.section-title{
+text-align:center;
+margin:50px 0 20px;
+font-size:28px;
+color:var(--gold);
 }
 
-.hero button{
-    margin-top:25px;
-    padding:14px 35px;
-    border:none;
-    border-radius:30px;
-    background:gold;
-    font-weight:600;
-    cursor:pointer;
-}
-
-/* CATEGORY */
-.categories{
-    padding:50px 5%;
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-}
-
-.category{
-    flex:1;
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,0.05);
-    transition:0.3s;
-    cursor:pointer;
-}
-
-.category:hover{
-    transform:translateY(-8px);
-}
-
-.category span{
-    font-size:40px;
-}
-
-.category h4{
-    margin-top:10px;
-}
-
-/* PRODUCTS */
+/* Product Grid */
 .products{
-    padding:50px 5%;
-}
-
-.products h2{
-    margin-bottom:25px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:25px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:20px 8%;
 }
 
 .card{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,0.05);
-    transition:0.3s;
-    position:relative;
+background:rgba(255,255,255,0.05);
+border-radius:20px;
+overflow:hidden;
+cursor:pointer;
+transition:0.4s;
+position:relative;
 }
 
 .card:hover{
-    transform:translateY(-8px);
-}
-
-.badge{
-    position:absolute;
-    top:10px;
-    left:10px;
-    background:#e74c3c;
-    color:white;
-    padding:5px 10px;
-    font-size:12px;
-    border-radius:20px;
+transform:translateY(-10px);
+box-shadow:0 0 20px var(--gold);
 }
 
 .card img{
-    width:100%;
-    height:250px;
-    object-fit:cover;
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.badge{
+position:absolute;
+top:10px;
+left:10px;
+background:var(--gold);
+color:black;
+padding:5px 10px;
+border-radius:20px;
+font-size:12px;
 }
 
 .card-body{
-    padding:15px;
+padding:15px;
 }
 
 .price{
-    color:#e74c3c;
-    font-weight:600;
+color:var(--gold);
+font-weight:600;
 }
 
-.old{
-    text-decoration:line-through;
-    color:gray;
-    font-size:13px;
+.old-price{
+text-decoration:line-through;
+font-size:14px;
+opacity:0.6;
 }
 
-.rating{
-    color:orange;
-    font-size:14px;
-    margin:5px 0;
+.discount{
+color:red;
+font-size:13px;
 }
 
-.card button{
-    width:100%;
-    padding:10px;
-    border:none;
-    background:#2c3e50;
-    color:white;
-    border-radius:8px;
-    margin-top:10px;
-    cursor:pointer;
+/* Popup Detail */
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:2000;
 }
 
-/* PROMO */
-.promo{
-    background:#ffeaa7;
-    padding:60px 5%;
-    text-align:center;
-    margin-top:40px;
+.popup-content{
+background:var(--brown);
+padding:30px;
+border-radius:20px;
+max-width:400px;
+animation:fadeIn 0.4s ease;
 }
 
-.promo h2{
-    font-size:30px;
+@keyframes fadeIn{
+from{transform:scale(0.7);opacity:0}
+to{transform:scale(1);opacity:1}
 }
 
-/* FOOTER */
-footer{
-    background:#1f2937;
-    color:white;
-    padding:40px 5%;
-    margin-top:40px;
+/* Cart Slide */
+.cart{
+position:fixed;
+right:-400px;
+top:0;
+width:350px;
+height:100%;
+background:linear-gradient(var(--maroon),var(--gold));
+padding:20px;
+transition:0.5s;
+z-index:3000;
 }
 
-.footer-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
+.cart.open{
+right:0;
 }
 
-footer h4{
-    margin-bottom:10px;
+.cart h2{
+margin-bottom:20px;
 }
 
-footer p{
-    font-size:14px;
-    opacity:0.8;
+.cart-item{
+margin-bottom:15px;
+border-bottom:1px solid rgba(255,255,255,0.3);
+padding-bottom:10px;
 }
 
-@media(max-width:768px){
-    .categories{
-        flex-direction:column;
-    }
-    .search input{
-        width:150px;
-    }
+button{
+padding:10px 15px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+margin-top:10px;
+background:var(--gold);
+color:black;
+font-weight:600;
 }
+
+button:hover{
+opacity:0.8;
+}
+
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-    <div class="logo">LuxeFashion</div>
-    <div class="search">
-        <input type="text" placeholder="Cari produk...">
-    </div>
-    <div class="menu">
-        <a href="#">Home</a>
-        <a href="#">Kategori</a>
-        <a href="#">Promo</a>
-        <a href="#">Keranjang</a>
-    </div>
-</div>
+<nav>
+<div class="logo">Luxury Gamis & Pants</div>
+<div class="cart-btn" onclick="toggleCart()">Keranjang</div>
+</nav>
 
-<!-- HERO -->
-<div class="hero">
-    <h1>Marketplace Fashion Modern</h1>
-    <p>Koleksi Gamis, Couple & Fashion Trendy dengan Harga Terbaik</p>
-    <button>Belanja Sekarang</button>
-</div>
+<section class="hero">
+<h1>Premium Fashion Collection 2026</h1>
+</section>
 
-<!-- CATEGORY -->
-<div class="categories">
-    <div class="category">
-        <span>👗</span>
-        <h4>Gamis</h4>
-    </div>
-    <div class="category">
-        <span>👨‍👩‍👧</span>
-        <h4>Couple</h4>
-    </div>
-    <div class="category">
-        <span>🧒</span>
-        <h4>Anak-anak</h4>
-    </div>
-    <div class="category">
-        <span>👜</span>
-        <h4>Aksesoris</h4>
-    </div>
-</div>
-
-<!-- PRODUCTS -->
+<h2 class="section-title">Best Seller & Unggulan</h2>
 <div class="products">
-    <h2>Produk Terlaris 🔥</h2>
-    <div class="grid">
 
-        <div class="card">
-            <div class="badge">-20%</div>
-            <img src="https://via.placeholder.com/300x400" alt="">
-            <div class="card-body">
-                <h4>Gamis Elegan Modern</h4>
-                <div class="rating">⭐⭐⭐⭐☆ (120)</div>
-                <div class="price">Rp199.000 <span class="old">Rp249.000</span></div>
-                <button>Tambah ke Keranjang</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="badge">-15%</div>
-            <img src="https://via.placeholder.com/300x400" alt="">
-            <div class="card-body">
-                <h4>Couple Family Premium</h4>
-                <div class="rating">⭐⭐⭐⭐⭐ (85)</div>
-                <div class="price">Rp349.000 <span class="old">Rp420.000</span></div>
-                <button>Tambah ke Keranjang</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="badge">-10%</div>
-            <img src="https://via.placeholder.com/300x400" alt="">
-            <div class="card-body">
-                <h4>Dress Anak Trendy</h4>
-                <div class="rating">⭐⭐⭐⭐☆ (60)</div>
-                <div class="price">Rp129.000 <span class="old">Rp170.000</span></div>
-                <button>Tambah ke Keranjang</button>
-            </div>
-        </div>
-
-    </div>
+<div class="card" onclick="openPopup('Gamis Royal Maroon',350000,25,'Gamis premium bahan satin silk elegan.')">
+<div class="badge">Best Seller</div>
+<img src="https://picsum.photos/300/400?1">
+<div class="card-body">
+<h3>Gamis Royal Maroon</h3>
+<p class="old-price">Rp 350.000</p>
+<p class="price">Rp 262.500</p>
+<p class="discount">Diskon 25%</p>
+</div>
 </div>
 
-<!-- PROMO -->
-<div class="promo">
-    <h2>Diskon Hingga 50% Minggu Ini!</h2>
-    <p>Belanja sekarang dan dapatkan promo terbatas</p>
+<div class="card" onclick="openPopup('Celana Anak Premium',150000,20,'Celana anak bahan cotton premium nyaman.')">
+<div class="badge">Unggulan</div>
+<img src="https://picsum.photos/300/400?2">
+<div class="card-body">
+<h3>Celana Anak Premium</h3>
+<p class="old-price">Rp 150.000</p>
+<p class="price">Rp 120.000</p>
+<p class="discount">Diskon 20%</p>
+</div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-    <div class="footer-grid">
-        <div>
-            <h4>LuxeFashion</h4>
-            <p>Marketplace fashion modern dengan kualitas premium.</p>
-        </div>
-        <div>
-            <h4>Bantuan</h4>
-            <p>FAQ</p>
-            <p>Pengiriman</p>
-            <p>Kebijakan Refund</p>
-        </div>
-        <div>
-            <h4>Kontak</h4>
-            <p>Email: support@luxefashion.com</p>
-            <p>Instagram: @luxefashion</p>
-        </div>
-    </div>
-</footer>
+</div>
+
+<h2 class="section-title">Koleksi Gamis</h2>
+<div class="products">
+<script>
+for(let i=3;i<=6;i++){
+document.write(`
+<div class="card" onclick="openPopup('Gamis Elegan ${i}',300000,15,'Deskripsi detail gamis elegan modern.')">
+<img src="https://picsum.photos/300/400?${i}">
+<div class="card-body">
+<h3>Gamis Elegan ${i}</h3>
+<p class="old-price">Rp 300.000</p>
+<p class="price">Rp 255.000</p>
+<p class="discount">Diskon 15%</p>
+</div>
+</div>
+`)
+}
+</script>
+</div>
+
+<h2 class="section-title">Celana Anak & Dewasa</h2>
+<div class="products">
+<script>
+for(let i=7;i<=10;i++){
+document.write(`
+<div class="card" onclick="openPopup('Celana Fashion ${i}',200000,10,'Celana modern untuk anak & dewasa.')">
+<img src="https://picsum.photos/300/400?${i}">
+<div class="card-body">
+<h3>Celana Fashion ${i}</h3>
+<p class="old-price">Rp 200.000</p>
+<p class="price">Rp 180.000</p>
+<p class="discount">Diskon 10%</p>
+</div>
+</div>
+`)
+}
+</script>
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup" onclick="closePopup()">
+<div class="popup-content">
+<h3 id="popupTitle"></h3>
+<p id="popupDesc"></p>
+<p id="popupPrice"></p>
+<button onclick="addToCart()">Tambah ke Keranjang</button>
+</div>
+</div>
+
+<!-- Cart -->
+<div class="cart" id="cart">
+<h2>Keranjang Belanja</h2>
+<div id="cartItems"></div>
+<button onclick="toggleCart()">Tutup</button>
+</div>
+
+<script>
+let cart = [];
+let selectedProduct = "";
+
+function openPopup(name,price,discount,desc){
+selectedProduct = name;
+document.getElementById('popupTitle').innerText=name;
+document.getElementById('popupDesc').innerText=desc;
+let finalPrice = price - (price*discount/100);
+document.getElementById('popupPrice').innerText="Harga: Rp "+finalPrice.toLocaleString();
+document.getElementById('popup').style.display="flex";
+}
+
+function closePopup(){
+document.getElementById('popup').style.display="none";
+}
+
+function addToCart(){
+cart.push(selectedProduct);
+renderCart();
+closePopup();
+}
+
+function renderCart(){
+let container=document.getElementById('cartItems');
+container.innerHTML="";
+cart.forEach(item=>{
+container.innerHTML+=`<div class="cart-item">${item}</div>`;
+});
+}
+
+function toggleCart(){
+document.getElementById('cart').classList.toggle('open');
+}
+</script>
 
 </body>
 </html>
