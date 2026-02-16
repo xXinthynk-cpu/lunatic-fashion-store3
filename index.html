@@ -17,46 +17,89 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-font-family:'Poppins',sans-serif;
-background:var(--darkgreen);
-color:white;
-}
+body{font-family:'Poppins',sans-serif;background:var(--darkgreen);color:white;overflow-x:hidden}
 
-/* HERO */
+/* ================= HERO ================= */
 .hero{
+position:relative;
 height:100vh;
-background:url('https://images.unsplash.com/photo-1520975918318-7cba0a2f4f4f') center/cover;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-position:relative;
+overflow:hidden;
 }
+
+.hero img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:1;
+}
+
 .hero::after{
 content:'';
 position:absolute;
-width:100%;height:100%;
-background:rgba(0,0,0,0.6);
-}
-.hero-content{
-position:relative;
+width:100%;
+height:100%;
+background:linear-gradient(to right, rgba(14,43,38,0.85), rgba(90,15,28,0.7));
 z-index:2;
 }
+
+.hero-content{
+position:relative;
+z-index:3;
+animation:fadeSlide 1.8s ease forwards;
+opacity:0;
+transform:translateY(40px);
+}
+
+@keyframes fadeSlide{
+to{opacity:1;transform:translateY(0);}
+}
+
 .hero h1{
-font-family:'Playfair Display',serif;
 font-size:60px;
 color:var(--gold);
+font-family:'Playfair Display';
 letter-spacing:3px;
 }
-.hero p{margin-top:20px;color:var(--cream);}
+
+.hero p{margin-top:15px;font-size:18px;color:var(--cream);}
+
+.promo{
+margin:30px auto;
+padding:15px 25px;
+background:rgba(0,0,0,0.6);
+border:1px solid var(--gold);
+border-radius:10px;
+width:fit-content;
+}
+
+.promo span{
+color:var(--gold);
+font-weight:bold;
+font-size:22px;
+}
+
+.hero button{
+margin-top:20px;
+padding:12px 25px;
+border:none;
+background:var(--gold);
+font-weight:bold;
+cursor:pointer;
+border-radius:8px;
+}
 
 /* SHIMMER GOLD */
 @keyframes shimmer{
 0%{background-position:-500px 0;}
 100%{background-position:500px 0;}
 }
-.gold-text{
+
+.gold-shimmer{
 background:linear-gradient(90deg,#d4af37,#fff8dc,#d4af37);
 background-size:400px 100%;
 -webkit-background-clip:text;
@@ -64,16 +107,9 @@ background-size:400px 100%;
 animation:shimmer 3s infinite linear;
 }
 
-/* PRODUCTS */
-.section{
-padding:60px 8%;
-}
-.section h2{
-text-align:center;
-margin-bottom:40px;
-color:var(--gold);
-font-family:'Playfair Display';
-}
+/* ================= PRODUCTS ================= */
+.section{padding:70px 8%;}
+.section h2{text-align:center;margin-bottom:40px;color:var(--gold);font-family:'Playfair Display';}
 
 .grid{
 display:grid;
@@ -89,6 +125,7 @@ box-shadow:0 0 20px rgba(212,175,55,0.2);
 transition:0.4s;
 position:relative;
 }
+
 .card:hover{
 transform:translateY(-10px);
 box-shadow:0 0 30px rgba(212,175,55,0.5);
@@ -96,24 +133,9 @@ box-shadow:0 0 30px rgba(212,175,55,0.5);
 
 .card img{
 width:100%;
-height:300px;
+height:280px;
 object-fit:cover;
 cursor:pointer;
-}
-
-.card-body{
-padding:20px;
-}
-
-.price{
-color:var(--gold);
-font-weight:bold;
-}
-
-.old-price{
-text-decoration:line-through;
-color:#aaa;
-font-size:14px;
 }
 
 .badge{
@@ -126,7 +148,11 @@ font-size:12px;
 border-radius:5px;
 }
 
-/* BUTTON */
+.card-body{padding:20px;}
+
+.old{text-decoration:line-through;color:#aaa;font-size:14px;}
+.price{color:var(--gold);font-weight:bold;}
+
 button{
 padding:10px 15px;
 border:none;
@@ -136,13 +162,21 @@ cursor:pointer;
 margin-top:10px;
 border-radius:8px;
 font-weight:bold;
-transition:0.3s;
-}
-button:hover{
-background:white;
 }
 
-/* CART SLIDE */
+/* ================= CART ================= */
+.cart-toggle{
+position:fixed;
+top:20px;
+right:20px;
+background:var(--gold);
+padding:10px 15px;
+border-radius:50px;
+cursor:pointer;
+font-weight:bold;
+z-index:1000;
+}
+
 .cart{
 position:fixed;
 top:0;
@@ -156,64 +190,71 @@ padding:20px;
 z-index:999;
 overflow:auto;
 }
+
 .cart.active{right:0;}
+
 .cart h3{color:var(--gold);}
 .cart-item{margin:15px 0;border-bottom:1px solid #444;padding-bottom:10px;}
-.cart-toggle{
-position:fixed;
-top:20px;
-right:20px;
-background:var(--gold);
-padding:10px 15px;
-border-radius:50px;
-cursor:pointer;
-font-weight:bold;
-}
 
-/* POPUP */
+/* ================= POPUP ================= */
 .popup{
 position:fixed;
 top:0;left:0;
 width:100%;height:100%;
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,0.85);
 display:none;
 align-items:center;
 justify-content:center;
-z-index:999;
+z-index:9999;
 }
+
 .popup img{
 max-width:90%;
 max-height:90%;
 }
 
-/* MAP */
-iframe{width:100%;height:300px;border:0;}
-
+/* ================= FOOTER ================= */
 footer{
-text-align:center;
-padding:30px;
 background:var(--brown);
-margin-top:50px;
+padding:40px 10%;
+text-align:center;
 }
+
+footer a{
+color:var(--gold);
+text-decoration:none;
+}
+
+footer a:hover{text-decoration:underline;}
 </style>
 </head>
 
 <body>
 
 <div class="cart-toggle" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
-
 <div class="cart" id="cart">
 <h3>Keranjang Belanja</h3>
 <div id="cart-items"></div>
 </div>
 
+<!-- HERO -->
 <section class="hero">
+<img src="banner.jpg">
 <div class="hero-content">
-<h1 class="gold-text">ARQÉNZA</h1>
-<p>Luxury Modest & Modern Fashion</p>
+<h1 class="gold-shimmer">ARQÉNZA</h1>
+<p>Luxury Gamis & Elegant Pants For Modern Generation</p>
+
+<div class="promo">
+🔥 GRAND OPENING 🔥 Diskon Hingga <span>50%</span>
+</div>
+
+<button onclick="document.getElementById('best').scrollIntoView({behavior:'smooth'})">
+Lihat Koleksi
+</button>
 </div>
 </section>
 
+<!-- PRODUCTS -->
 <section class="section">
 <h2>Best Seller & Unggulan</h2>
 <div class="grid" id="best"></div>
@@ -229,15 +270,17 @@ margin-top:50px;
 <div class="grid" id="celana"></div>
 </section>
 
-<section class="section">
-<h2>Lokasi Kami</h2>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!..."></iframe>
-</section>
-
+<!-- FOOTER -->
 <footer>
-© 2026 ARQÉNZA Luxury Fashion
+<h3>ARQÉNZA Luxury Fashion</h3>
+<p>📍 Jl. Fashion Premium No.88, Jakarta</p>
+<p>📷 IG: <a href="#">@arqenza.official</a></p>
+<p>💬 WA: <a href="https://wa.me/6281234567890">Chat WhatsApp</a></p>
+<p>📘 FB: <a href="#">ARQÉNZA Official</a></p>
+<p style="margin-top:20px;">© 2026 All Rights Reserved</p>
 </footer>
 
+<!-- POPUP -->
 <div class="popup" id="popup" onclick="closePopup()">
 <img id="popup-img">
 </div>
@@ -245,41 +288,20 @@ margin-top:50px;
 <script>
 let cart=[]
 const products=[
-
-{title:"Gamis Royal Emerald",price:450000,discount:20,category:"best",
-image:"https://images.unsplash.com/photo-1520975918318-7cba0a2f4f4f",desc:"Gamis premium bahan satin silk elegan."},
-
-{title:"Celana Premium Gold Line",price:350000,discount:15,category:"best",
-image:"https://images.unsplash.com/photo-1516826957135-700dedea698c",desc:"Celana formal luxury pria & wanita."},
-
-{title:"Gamis Maroon Elegance",price:400000,discount:10,category:"gamis",
-image:"https://images.unsplash.com/photo-1495121605193-b116b5b09a3c",desc:"Desain modern dengan sentuhan maroon."},
-
-{title:"Gamis Dark Green Series",price:380000,discount:12,category:"gamis",
-image:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb",desc:"Warna hijau eksklusif ARQÉNZA."},
-
-{title:"Gamis Gold Accent",price:420000,discount:18,category:"gamis",
-image:"https://images.unsplash.com/photo-1520975661595-6453be3f7070",desc:"Aksen gold luxury limited edition."},
-
-{title:"Gamis Classic Brown",price:370000,discount:10,category:"gamis",
-image:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91",desc:"Nuansa cokelat elegan klasik."},
-
-{title:"Celana Anak Trendy",price:200000,discount:5,category:"celana",
-image:"https://images.unsplash.com/photo-1520975918318-7cba0a2f4f4f",desc:"Celana anak modern nyaman."},
-
-{title:"Celana Slim Dewasa",price:300000,discount:8,category:"celana",
-image:"https://images.unsplash.com/photo-1516826957135-700dedea698c",desc:"Slim fit pria & wanita."},
-
-{title:"Celana Brown Edition",price:320000,discount:12,category:"celana",
-image:"https://images.unsplash.com/photo-1495121605193-b116b5b09a3c",desc:"Cokelat eksklusif premium."},
-
-{title:"Celana Gold Stripe",price:340000,discount:20,category:"celana",
-image:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb",desc:"Limited gold stripe edition."},
-
-];
+{title:"Gamis Royal Emerald",price:450000,discount:20,category:"best",image:"https://images.unsplash.com/photo-1520975918318-7cba0a2f4f4f",desc:"Gamis premium satin silk."},
+{title:"Celana Premium Gold Line",price:350000,discount:15,category:"best",image:"https://images.unsplash.com/photo-1516826957135-700dedea698c",desc:"Celana luxury formal."},
+{title:"Gamis Maroon Elegance",price:400000,discount:10,category:"gamis",image:"https://images.unsplash.com/photo-1495121605193-b116b5b09a3c",desc:"Modern maroon design."},
+{title:"Gamis Dark Green Series",price:380000,discount:12,category:"gamis",image:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb",desc:"Exclusive dark green."},
+{title:"Gamis Gold Accent",price:420000,discount:18,category:"gamis",image:"https://images.unsplash.com/photo-1520975661595-6453be3f7070",desc:"Gold limited edition."},
+{title:"Gamis Classic Brown",price:370000,discount:10,category:"gamis",image:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91",desc:"Brown elegant series."},
+{title:"Celana Anak Trendy",price:200000,discount:5,category:"celana",image:"https://images.unsplash.com/photo-1520975918318-7cba0a2f4f4f",desc:"Comfortable kids pants."},
+{title:"Celana Slim Dewasa",price:300000,discount:8,category:"celana",image:"https://images.unsplash.com/photo-1516826957135-700dedea698c",desc:"Slim fit premium."},
+{title:"Celana Brown Edition",price:320000,discount:12,category:"celana",image:"https://images.unsplash.com/photo-1495121605193-b116b5b09a3c",desc:"Brown premium edition."},
+{title:"Celana Gold Stripe",price:340000,discount:20,category:"celana",image:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb",desc:"Luxury gold stripe."}
+]
 
 function render(){
-products.forEach((p,i)=>{
+products.forEach(p=>{
 let finalPrice=p.price-(p.price*p.discount/100)
 let html=`
 <div class="card">
@@ -288,12 +310,11 @@ let html=`
 <div class="card-body">
 <h4>${p.title}</h4>
 <p>${p.desc}</p>
-<div class="old-price">Rp ${p.price.toLocaleString()}</div>
+<div class="old">Rp ${p.price.toLocaleString()}</div>
 <div class="price">Rp ${finalPrice.toLocaleString()}</div>
 <button onclick="addCart('${p.title}',${finalPrice})">Tambah Keranjang</button>
 </div>
-</div>
-`
+</div>`
 document.getElementById(p.category).innerHTML+=html
 })
 }
@@ -304,18 +325,9 @@ document.getElementById("cart-count").innerText=cart.length
 document.getElementById("cart-items").innerHTML+=`<div class="cart-item">${title}<br>Rp ${price.toLocaleString()}</div>`
 }
 
-function toggleCart(){
-document.getElementById("cart").classList.toggle("active")
-}
-
-function openPopup(src){
-document.getElementById("popup-img").src=src
-document.getElementById("popup").style.display="flex"
-}
-
-function closePopup(){
-document.getElementById("popup").style.display="none"
-}
+function toggleCart(){document.getElementById("cart").classList.toggle("active")}
+function openPopup(src){document.getElementById("popup-img").src=src;document.getElementById("popup").style.display="flex"}
+function closePopup(){document.getElementById("popup").style.display="none"}
 
 render()
 </script>
